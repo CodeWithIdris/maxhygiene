@@ -1731,9 +1731,12 @@
 
                     // open modal
                     vm.openPdfPreview = function () {
-                        vm.previewDate = new Date();
-                        //vm.pdfEmail = '';
-                        $('#pdfModal').modal('show');
+                        alert("OPENPDFPREVIEW2 FIRED");
+                        window.open(
+                            'https://maxhygiene.netlify.app/app.maxhygiene.com/quote.html',
+                            '_blank'
+                            );
+                        
                     };
 
                     vm.openPdfPreview2 = function () {
@@ -1803,7 +1806,7 @@
                         //});
                     }
 
-                    vm.toasts = [];
+                    vm.toasts = []
 
                     // Show a toast
                     vm.showToast = function (message, type) {
