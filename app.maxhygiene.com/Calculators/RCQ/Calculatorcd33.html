@@ -1349,11 +1349,11 @@
 
 
                                             <span ng-if="vm.isLoggedIn()">
-                                                <button class="btn btn-success  btn-lg col-md-12" ng-click="vm.openCreateForm()" ng-disabled="!vm.lines.length"
+                                                <button class="btn btn-success  btn-lg col-md-12" ng-click="vm.openPdfPreview2()" ng-disabled="!vm.lines.length"
                                                         ng-if="!vm.docId" onclick="mixpanel.track('Domestic Calculator - Create Quote Clicked')">
                                                     Create Quote
                                                 </button>
-                                                <button class="btn btn-primary  btn-lg col-md-12" ng-click="vm.openCreateForm()" ng-disabled="!vm.lines.length || vm.creatingItems" ng-if="vm.docId"
+                                                <button class="btn btn-primary  btn-lg col-md-12" ng-click="vm.openPdfPreview2()" ng-disabled="!vm.lines.length || vm.creatingItems" ng-if="vm.docId"
                                                         onclick="mixpanel.track('Domestic Calculator - Insert Into Quote Clicked')">
                                                     Insert Into Quote
                                                 </button>
@@ -1367,7 +1367,7 @@
                                                     Create Quote
                                                 </button>
                                                 <!--<button class="btn btn-success ml-2" ng-click="vm.openCreateForm()" ng-disabled="true" ng-if="!vm.docId">
-                                                    Create Quote (DocFlite Required)
+                                                    Create Quote (MaxHygiene Required)
                                                 </button>
                                                 <button class="btn btn-primary ml-2" ng-click="vm.createItemsOnly()" ng-disabled="true" ng-if="vm.docId">Insert Into Quote<div>(Login Required)</div></button>-->
                                             </span>
@@ -1509,11 +1509,11 @@
         <div class="text-center" style="padding-top:10px;">
 
             <div ng-if="vm.isLoggedIn()">
-                <button class="btn btn-success" style="width:90%;max-width:600px;" ng-click="vm.openCreateForm()" ng-disabled="!vm.lines.length"
+                <button class="btn btn-success" style="width:90%;max-width:600px;" ng-click="vm.openPdfPreview2()" ng-disabled="!vm.lines.length"
                         ng-if="!vm.docId" onclick="mixpanel.track('Domestic Calculator - Create Quote Clicked')">
                     Create Quote
                 </button>
-                <button class="btn btn-success" ng-click="vm.openCreateForm()" ng-disabled="!vm.lines.length || vm.creatingItems" ng-if="vm.docId"
+                <button class="btn btn-success" ng-click="vm.openPdfPreview2()"" ng-disabled="!vm.lines.length || vm.creatingItems" ng-if="vm.docId"
                         onclick="mixpanel.track('Domestic Calculator - Insert Into Quote Clicked')">
                     Insert Into Quote
                 </button>
