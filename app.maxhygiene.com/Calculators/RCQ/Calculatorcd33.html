@@ -1730,18 +1730,9 @@
                     };
 
                     // open modal
-                    vm.openPdfPreview2 = function () {
-                        alert("OPENPDFPREVIEW2 FIRED");
-
-                        window.open(
-                            'https://maxhygiene.netlify.app/app.maxhygiene.com/quote.html',
-                            '_blank'
-                        );
+                    vm.openPdfPreview = function () {
                         
-                    };
-
-                  
-
+                    
                         // we need to structure json into:
                         // lets get the prcing models:
 
@@ -1803,7 +1794,7 @@
                         //}).then(function (res) {
                         //    console.log(res.data);
                         //});
-                    }
+                    };
 
                     vm.toasts = []
 
