@@ -1786,10 +1786,12 @@
                         };
 
                         // this json can be populated from a website or socials.
-                        var templateId = 90;    //depends on the cleaning type.
-                        var payload = encodeURIComponent(JSON.stringify(myJson));
-
-                        $window.location.href = "/Creator/Index#/TemplateLibrary/" + templateId + "?payload=" + payload;
+                        
+                        localStorage.setItem(
+                            "maxhygieneQuote",
+                            JSON.stringify(myJson)
+                        );
+                        $window.location.href = "/quote.html";
 
                         //$http.get("http://localhost/Creator/Index#/TemplateLibrary", {
                         //    templateId: 76,
