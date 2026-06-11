@@ -1,0 +1,6 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+app.docflite.com	TRUE	/	FALSE	1999999999	ARRAffinity	da32cc3364308530eff3b46244d2196f052c0e529fb922c0ee415ec9edfd3023
+app.docflite.com	TRUE	/	FALSE	1999999999	ARRAffinitySameSite	da32cc3364308530eff3b46244d2196f052c0e529fb922c0ee415ec9edfd3023
+app.docflite.com	TRUE	/	FALSE	1999999999	SameSite	None
+

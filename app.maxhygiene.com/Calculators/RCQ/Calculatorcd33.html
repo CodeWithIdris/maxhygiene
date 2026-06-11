@@ -1,0 +1,2798 @@
+<!doctype html>
+<html lang="en" ng-app="cleaningApp">
+
+<!-- Mirrored from app.docflite.com/Calculators/RCQ/Calculator.html?utm-source=fb&utm_medium=dcbn-page&fbclid=IwZnRzaAQNWzpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEe-VMiencb2q4N21FWxk5ACp0uJ2n4WEWhqWcrPRaUlOz-qGT9g2M-kpvawLc_aem_4FS5t1_FAilXy23rlD7R1g by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2026 13:42:51 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Cleaning Calculator - Free Cleaning Quote Tool | DocFlite</title>
+    <meta name="description" content="Estimate cleaning job costs in minutes with DocFlite's Cleaning Calculator. Get instant quotes, examples and a downloadable PDF quote." />
+    <link rel="canonical" href="https://docflite.com/cleaning-calculator" />
+    <meta name="robots" content="index,follow" />
+
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Cleaning Calculator — Free Cleaning Quote Tool | DocFlite" />
+    <meta property="og:description" content="Estimate cleaning job costs in minutes with DocFlite's Cleaning Calculator. Get instant quotes, examples and a sendable quote." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/cleaning-calculator" />
+
+    <script src="../../../code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="../../../cdn.jsdelivr.net/npm/popper.js%401.16.1/dist/umd/popper.min.js"></script>
+    <script src="../../../stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../../stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+
+    <script src="../../../ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <!-- after angular.js -->
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.6/ui-bootstrap-tpls.min.js"></script>
+    <script src="../../Scripts/tracking/mixpanel.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="../../../ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-sanitize.js"></script>
+    <!-- Structured Data for SEO (HowTo + FAQ) -->
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to price a cleaning job",
+        "description": "Quick steps to estimate the price of a cleaning job using the DocFlite Cleaning Calculator.",
+        "step": [
+        {"@type":"HowToStep","name":"Select property type","text":"Choose from a list of residential properties or add your own spaces."},
+        {"@type":"HowToStep","name":"Add services","text":"Add bathrooms, kitchens and extras like oven cleaning."},
+        {"@type":"HowToStep","name":"Adjust rates","text":"Set your hourly rate. Adjust the cleaning difficulty to add more cleaning time."}
+        ]
+        }
+    </script>
+
+
+    <script type="application/ld+json">
+        {
+        "@context":"https://schema.org",
+        "@type":"FAQPage",
+        "mainEntity":[
+        {"@type":"Question","name":"How accurate is the Cleaning Calculator?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses the information you provide to help you arrive at an extimate."}},
+        {"@type":"Question","name":"Can I send the price to my client?","acceptedAnswer":{"@type":"Answer","text":"Yes — generate a Professional Quote and send it to clients or save it for your records."}}
+        ]
+        }
+    </script>
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Open Sans','Montserrat';
+            font-size: 12px;
+        }
+
+        .card {
+            border-radius: 1rem;
+        }
+
+        .badge-pill {
+            font-weight: 600;
+            padding: 10px;
+        }
+
+        .table thead th {
+            white-space: nowrap;
+            padding: 10px;
+        }
+
+        td {
+            padding: 20px;
+        }
+
+        .slider-labels span {
+            font-size: .85rem;
+        }
+
+        .small-muted {
+            font-size: .9rem;
+            color: #6c757d;
+        }
+
+        .test-pass {
+            color: #28a745;
+        }
+
+        .test-fail {
+            color: #dc3545;
+        }
+
+        .notes-box {
+            border-radius: 4px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .selected-preset {
+            border-color: green;
+            border: solid 2px green;
+            /*padding: 20px;*/
+            border-radius: 4px;
+        }
+
+        .bg-squiggles {
+            --bg: #f5f7fa; /* page background */
+            --tile: 50px; /* pattern size (smaller = denser) */
+            background-color: var(--bg);
+            background-image: url("data:image/svg+xml;utf8,\
+        <svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'>\
+          <rect width='240' height='240' fill='none'/>\
+          <g stroke='%2390a4b8' stroke-opacity='0.25' stroke-width='2' fill='none' stroke-linecap='round'>\
+            <path d='M-20 40 C 20 10, 60 70, 100 40 S 180 10, 220 40'/>\
+            <path d='M-20 100 C 20 70, 60 130, 100 100 S 180 70, 220 100'/>\
+            <path d='M-20 160 C 20 130, 60 190, 100 160 S 180 130, 220 160'/>\
+            <path d='M-20 220 C 20 190, 60 250, 100 220 S 180 190, 220 220'/>\
+            <path d='M20 -20 C 50 20, -10 60, 20 100 S 50 180, 20 220'/>\
+            <path d='M80 -20 C 110 20, 50 60, 80 100 S 110 180, 80 220'/>\
+            <path d='M140 -20 C 170 20, 110 60, 140 100 S 170 180, 140 220'/>\
+            <path d='M200 -20 C 230 20, 170 60, 200 100 S 230 180, 200 220'/>\
+          </g>\
+        </svg>");
+            background-size: var(--tile) var(--tile);
+            background-attachment: fixed; /* optional: nice parallax feel */
+        }
+
+        /* Dark mode variant (auto) */
+        /*@media (prefers-color-scheme: dark) {
+            .bg-squiggles {
+                --bg: #0f172a;
+                background-image: url("data:image/svg+xml;utf8,\
+        <svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'>\
+          <rect width='240' height='240' fill='none'/>\
+          <g stroke='%23cbd5e1' stroke-opacity='0.12' stroke-width='2' fill='none' stroke-linecap='round'>\
+            <path d='M-20 40 C 20 10, 60 70, 100 40 S 180 10, 220 40'/>\
+            <path d='M-20 100 C 20 70, 60 130, 100 100 S 180 70, 220 100'/>\
+            <path d='M-20 160 C 20 130, 60 190, 100 160 S 180 130, 220 160'/>\
+            <path d='M-20 220 C 20 190, 60 250, 100 220 S 180 190, 220 220'/>\
+            <path d='M20 -20 C 50 20, -10 60, 20 100 S 50 180, 20 220'/>\
+            <path d='M80 -20 C 110 20, 50 60, 80 100 S 110 180, 80 220'/>\
+            <path d='M140 -20 C 170 20, 110 60, 140 100 S 170 180, 140 220'/>\
+            <path d='M200 -20 C 230 20, 170 60, 200 100 S 230 180, 200 220'/>\
+          </g>\
+        </svg>");
+            }
+        }*/
+
+        .video-wrapper {
+            height: 100%;
+            min-height: 500px; /* ensures at least 500px */
+            display: flex;
+        }
+
+            .video-wrapper iframe {
+                flex: 1; /* iframe fills parent */
+            }
+
+        textarea {
+            border-radius: 4px;
+            width: 100%;
+            min-height: 120px;
+            padding: 20px;
+            font-size: 1.2em;
+            border: solid 1px lightgrey;
+            resize: none;
+        }
+
+        .document-page {
+            padding: 5%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            border-radius: 10px;
+        }
+
+        /* Optional: tighter on very small screens */
+        @media (max-width: 768px) {
+            .document-page {
+                padding: 10px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                border-radius: 10px;
+            }
+        }
+
+        input.ng-invalid.ng-touched {
+            border-color: #dc3545; /* Bootstrap danger red */
+        }
+
+        input.ng-valid.ng-touched {
+            border-color: #28a745; /* Bootstrap success green */
+        }
+
+        .preset-ribbon {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+            padding-bottom: 0.5rem;
+        }
+
+        .preset-item {
+            flex: 0 0 auto; /* don’t shrink, don’t grow */
+            width: 150px; /* consistent width */
+            margin-right: 1rem;
+            cursor: pointer;
+            scroll-snap-align: start;
+        }
+
+        .preset-ribbon::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .preset-ribbon::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        input {
+            font-size: 1.2em;
+        }
+
+        .dropdown-menu {
+            padding: 10px;
+            border: solid 1px #ddd;
+        }
+    </style>
+
+    <style>
+        /* --- Fixed header & footer (translucent glass) --- */
+        :root {
+            --header-h: 64px; /* adjust to taste */
+            --footer-h: 56px; /* adjust to taste */
+            --glass-bg: rgba(255,255,255,.75);
+            --glass-border: rgba(0,0,0,.08);
+            --shadow: 0 4px 14px rgba(0,0,0,.08);
+        }
+
+        /* Dark-mode friendly default (optional) */
+        /*@media (prefers-color-scheme: dark) {
+            :root {
+                --glass-bg: rgba(22,22,28,.72);
+                --glass-border: rgba(255,255,255,.08);
+                --shadow: 0 6px 18px rgba(0,0,0,.35);
+            }
+        }*/
+
+        .app-header,
+        .app-footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 1030; /* above content, below modals */
+            background: var(--glass-bg);
+            backdrop-filter: saturate(140%) blur(8px);
+            -webkit-backdrop-filter: saturate(140%) blur(8px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+        }
+
+        .app-header {
+            top: 0;
+            height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+            padding-top: env(safe-area-inset-top, 0px);
+            display: flex;
+            align-items: center;
+        }
+
+        .app-footer {
+            bottom: 0;
+            height: calc(var(--footer-h) + env(safe-area-inset-bottom, 0px));
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: none;
+        }
+
+        /* Space the page so content isn’t under header/footer */
+        .app-main {
+            padding-top: calc(var(--header-h) + 16px);
+            padding-bottom: calc(var(--footer-h) + 16px);
+            max-width: 1600px;
+        }
+
+        /* Make containers align nicely edge-to-edge on small screens */
+        .app-header .container,
+        .app-footer .container {
+            height: 100%;
+        }
+
+        /* Optional: tighter on very small screens */
+        @media (max-width: 575.98px) {
+            :root {
+                --header-h: 56px;
+                --footer-h: 50px;
+            }
+        }
+
+        .container {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
+    <style>
+        .table-scroll {
+            overflow-x: auto;
+            overflow-y: visible;
+            max-width: 100%;
+            position: relative;
+            border-radius: 6px;
+        }
+
+        /* Freeze first column */
+        .sticky-col {
+            position: sticky;
+            left: 0;
+            background: #fff;
+            z-index: 2;
+            box-shadow: 2px 0 3px rgba(0,0,0,0.05);
+        }
+
+        /* First column sticky */
+        .first-col {
+            left: 0;
+            z-index: 3; /* higher than middle cells */
+        }
+
+        /* Last column sticky */
+        .last-col {
+            right: 0;
+            z-index: 3;
+        }
+
+        /* Optional: make header sticky too */
+        .table-scroll thead th:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 3;
+            background: #f8f9fa;
+        }
+
+        .table-scroll thead th:last-child {
+            position: sticky;
+            right: 0;
+            z-index: 3;
+            background: #f8f9fa;
+        }
+
+
+        /* Optional: smoother scroll UX */
+        .table-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .table-scroll::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+
+        .table-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .table td, .table th {
+            vertical-align: middle !important;
+        }
+
+            .table td.text-right {
+                text-align: right;
+            }
+
+            .table td.text-center {
+                text-align: center;
+            }
+        /* Freeze Space column (already applied) */
+        .sticky-col {
+            position: sticky;
+            left: 0;
+            background: #fff;
+            z-index: 5; /* keep above all scrolling content */
+            box-shadow: 2px 0 3px rgba(0,0,0,0.05);
+        }
+
+        /* Qty stepper buttons stay below sticky column */
+        .qty-stepper {
+            position: relative;
+            z-index: 1; /* ensures buttons don't overlap frozen col */
+            max-width: 110px;
+        }
+
+            .qty-stepper input {
+                text-align: center;
+                padding: 4px 2px;
+            }
+
+            .qty-stepper button {
+                width: 28px;
+                font-weight: bold;
+                line-height: 1;
+                padding: 0;
+            }
+
+            /* Adjust button color to fit DocFlite theme */
+            .qty-stepper .btn-outline-secondary {
+                border-color: #ccc;
+                color: #555;
+            }
+
+                .qty-stepper .btn-outline-secondary:hover {
+                    background-color: #602270;
+                    color: #fff;
+                    border-color: #602270;
+                }
+
+        .preset-group-btn {
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            border: solid 2px #ddd;
+            border-radius: 4px;
+        }
+    </style>
+
+    <style>
+        .quote-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .quote-section:hover {
+                box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            }
+
+        .quote-image {
+            max-height: 150px;
+            width: auto;
+            border-radius: 6px;
+            transition: transform 0.3s ease;
+        }
+
+        .quote-section:hover .quote-image {
+            transform: scale(1.03);
+        }
+
+        /* 🧱 Responsive adjustments */
+        @media (max-width: 767px) {
+            .quote-section {
+                text-align: center;
+            }
+
+            .quote-image {
+                max-height: 120px;
+                margin-top: 10px;
+            }
+        }
+    </style>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            '../../../connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '759553735622030');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&amp;ev=PageView&amp;noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = '../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PX595DB');
+    </script>
+    <!-- End Google Tag Manager -->
+
+</head>
+
+
+<body ng-controller="CalcCtrl as vm" class="pb-5 bg-squiggles">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PX595DB"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Fixed Header -->
+    <header class="app-header">
+        <div style="width:100%" class="text-center">
+            <h3 class="text-center">Total: <b>{{ vm.grand.subtotal | currency: (vm.settings.currency.Id || '£') }}</b></h3>
+        </div>
+    </header>
+
+    <main class="app-main container">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-lg-12 text-center mt-3">
+                    <div class="d-flex flex-column align-items-center">
+                        <!-- Logo -->
+                        <img id="logo"
+                             src="../../Images/DocFlite-Logo-Transparent.png"
+                             alt="DocFlite Logo"
+                             style="height:60px;width:auto;margin-bottom:10px;"
+                             class="img-responsive selectable" />
+
+                        <!-- Title -->
+                        <h1 class="h4 mb-2"><b>Cleaning Calculator</b></h1>
+
+                        <!-- Powered by + user info -->
+                        <div class="mt-2">
+                            <span class="badge badge-info">
+                                Powered by <b>DocFlite</b> (v0.5)
+                            </span>
+                            <a href="https://app.docflite.com/"
+                               class="badge badge-info ml-2"
+                               ng-if="vm.isLoggedIn()">
+                                {{vm.auth.name}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div><hr />
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-3 col-lg-2">
+                    <div class="card mb-12 shadow-sm">
+                        <div hidden class="card-body">
+                            <h2 class="h5 mb-3"><b>Quick Presets</b></h2>
+                            <p>Select from one of the preset property types or simply start adding spaces to your quote.</p>
+                            <div class="d-flex flex-wrap">
+                                <div class="text-center mr-3 mb-3" ng-class="{'selected-preset': vm.preset == 1, '': vm.preset != 1}" style="cursor:pointer;" ng-click="vm.applyPreset('large')" onclick="mixpanel.track('Domestic Calculator - Large Home Preset Clicked')">
+
+                                    <img src="../Images/Large%20Family%20Home.jpg" class="img-fluid rounded shadow-sm img-responsive" style="width:100%;max-width:150px;">
+                                    <div class="mt-2 font-weight-bold">Large Family Home</div>
+                                </div>
+                                <div class="text-center mr-3 mb-3" ng-class="{'selected-preset': vm.preset == 2, '': vm.preset != 2}" style="cursor:pointer;" ng-click="vm.applyPreset('medium')" onclick="mixpanel.track('Domestic Calculator - Medium Home Preset Clicked')">
+                                    <img src="../Images/Medium%20Family%20Home.jpg" class="img-fluid rounded shadow-sm img-responsive" style="width:100%;max-width:150px;">
+                                    <div class="mt-2 font-weight-bold">Medium Family Home</div>
+                                </div>
+                                <div class="text-center mr-3 mb-3" ng-class="{'selected-preset': vm.preset == 3, '': vm.preset != 3}" style="cursor:pointer;" ng-click="vm.applyPreset('small')" onclick="mixpanel.track('Domestic Calculator - Small Home Preset Clicked')">
+                                    <img src="../Images/Small%20Family%20Home.jpg" class="img-fluid rounded shadow-sm img-responsive" style="width:100%;max-width:150px;">
+                                    <div class="mt-2 font-weight-bold">Small Family Home</div>
+                                </div>
+
+                                <div class="text-center mr-3 mb-3" ng-class="{'selected-preset': vm.preset == 4, '': vm.preset != 3}" style="cursor:pointer;" ng-click="vm.applyPreset('small')" onclick="mixpanel.track('Domestic Calculator - Small Home Preset Clicked')">
+                                    <img src="../Images/Large%20Flat.png" class="img-fluid rounded shadow-sm img-responsive" style="width:100%;max-width:150px;">
+                                    <div class="mt-2 font-weight-bold">Large Flat</div>
+                                </div>
+
+                                <div class="text-center mr-3 mb-3" ng-class="{'selected-preset': vm.preset == 5, '': vm.preset != 3}" style="cursor:pointer;" ng-click="vm.applyPreset('small')" onclick="mixpanel.track('Domestic Calculator - Small Home Preset Clicked')">
+                                    <img src="../Images/Medium%20Flat.png" class="img-fluid rounded shadow-sm img-responsive" style="width:100%;max-width:150px;">
+                                    <div class="mt-2 font-weight-bold">Medium Flat</div>
+                                </div>
+
+                                <div class="text-center mr-3 mb-3" ng-class="{'selected-preset': vm.preset == 6, '': vm.preset != 3}" style="cursor:pointer;" ng-click="vm.applyPreset('small')" onclick="mixpanel.track('Domestic Calculator - Small Home Preset Clicked')">
+                                    <img src="../Images/Small%20Flat.png" class="img-fluid rounded shadow-sm img-responsive" style="width:100%;max-width:150px;">
+                                    <div class="mt-2 font-weight-bold">Small Flat</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body  d-none d-md-block">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+
+                                    <h2 class="h5 mb-3"><b><i class="fa fa-info-circle"></i> About This Calculator</b></h2>
+                                    <p>
+                                        The Domestic Cleaning calculator aims to speed up the process of calculating the amount of effort and the cost of cleaning a residence.<br />
+                                        The aim of this tool is to expand it's capabilities over time, based on users feedback.
+                                    </p>
+
+
+                                    <h2 class="h5 mb-3"><b><i class="fa fa-question-circle-o"></i> How to Use</b></h2>
+                                    <p>To get started, you can select from one of the Building presents: Large, Medium and Small home. You can also add individual spaces to your list.</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-lg-8">
+                    <div hidden class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+
+                                    <h2 class="h5 mb-3"><b>About This Calculator</b></h2>
+                                    <p>
+                                        The Domestic Cleaning calculator aims to speed up the process of calculating the amount of effort and the cost of cleaning a residence.<br />
+                                        The aim of this tool is to expand it's capabilities over time, based on users feedback.
+                                    </p>
+
+
+                                    <h2 class="h5 mb-3"><b>How to Use</b></h2>
+                                    <p>To get started, you can select from one of the Building presents: Large, Medium and Small home. You can also add individual spaces to your list.</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="h5 mb-3"><b><i class="fa fa-gbp"></i> Set Your Pricing</b></h2>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+
+
+                                    <div class="row">
+                                        <!-- Currency selector -->
+                                        <div class="col-md-4">
+                                            <label for="hourlyRate">Currency</label>
+                                            <select class="custom-select"
+                                                    ng-model="vm.settings.currency"
+                                                    ng-options="c as c.Name for c in vm.CurrencyList track by c.Code"
+                                                    ng-change="vm.recalc()">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <!-- Hourly rate input -->
+                                            <label for="hourlyRate">Hourly Rate /{{vm.settings.currency.Id || '£'}}</label>
+                                            <input id="hourlyRate"
+                                                   type="number"
+                                                   class="form-control"
+                                                   min="0"
+                                                   step="0.01"
+                                                   ng-model="vm.settings.hourlyRate"
+                                                   ng-change="vm.recalc()"
+                                                   ng-blur="vm.saveToTableStore()"
+                                                   placeholder="Enter rate">
+                                        </div>
+
+
+
+                                        <!-- tax rate -->
+                                        <div class="col-md-4">
+                                            <label for="hourlyRate">Tax Rate(%)</label>
+                                            <input id="taxRate"
+                                                   type="number"
+                                                   class="form-control"
+                                                   min="0"
+                                                   step="1"
+                                                   ng-model="vm.settings.vatRate"
+                                                   ng-change="vm.recalc()"
+                                                   placeholder="What is your tax (VAT) rate?">
+                                        </div>
+                                    </div>
+
+                                    <small class="form-text text-muted">The more accurate your info, the better our future quote analysis will be for your quotes.</small>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Difficulty markups: allows you to easily add more time based on the difficulty of the clean.</label>
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <div class="input-group input-group-sm mr-3 mb-2" style="width:150px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-success text-white">Easy</span>
+                                            </div>
+                                            <input type="number" class="form-control text-right"
+                                                   ng-model="vm.markups.easy"
+                                                   ng-change="vm.recalc();vm.saveLocal(true);"
+                                                   min="0" step="1">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group input-group-sm mr-3 mb-2" style="width:150px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-warning text-dark">Medium</span>
+                                            </div>
+                                            <input type="number" class="form-control text-right"
+                                                   ng-model="vm.markups.medium"
+                                                   ng-change="vm.recalc();vm.saveLocal(true);"
+                                                   min="0" step="1">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group input-group-sm mr-3 mb-2" style="width:150px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-danger text-white">Hard</span>
+                                            </div>
+                                            <input type="number" class="form-control text-right"
+                                                   ng-model="vm.markups.hard"
+                                                   ng-change="vm.recalc();vm.saveLocal(true);"
+                                                   min="0" step="1">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-sm btn-outline-secondary ml-auto mb-2"
+                                                ng-click="vm.resetDefaults()">
+                                            Reset to defaults
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--<div class="small-muted">Tip: Add your own spaces and set the default number of minutes it takes to clean the space type. <span class="text-primary" style="cursor:pointer" ng-click="vm.showSpaces = !vm.showSpaces">Manage Space Types</span>.</div>-->
+                            <div class="mt-3" ng-show="vm.showSpaces">
+                                <label for="spaceTypes">Space types (one per line, optional default minutes using ":")</label>
+                                <textarea id="spaceTypes" class="form-control" rows="4" ng-model="vm.spaceTypesText" ng-blur="vm.syncSpaceTypes(); vm.saveLocal(true)"></textarea>
+                                <small class="form-text text-muted">Example: <code>Bedroom:30</code>, <code>Bathroom:40</code>.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="h5 mb-3"><b><i class="fa fa-map-pin"></i> Set Your Location</b></h2>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+
+
+                                    <div class="row">
+                                        <p class="col-md-12">Enter your city and county so we can assess your quote against businesses in your area.</p>
+                                        <!-- city-->
+                                        <div class="col-md-4">
+                                            <label for="city">City</label>
+                                            <input id="city"
+                                                   type="text"
+                                                   class="form-control"
+                                                   min="0"
+                                                   step="1"
+                                                   ng-model="vm.city"
+                                                   placeholder="e.g. Birmingham">
+                                        </div>
+
+
+                                        <!-- city-->
+                                        <div class="col-md-4">
+                                            <label for="region">Country</label>
+                                            <input id="city"
+                                                   type="text"
+                                                   class="form-control"
+                                                   min="0"
+                                                   step="1"
+                                                   ng-model="vm.county"
+                                                   placeholder="e.g. England">
+                                        </div>
+                                    </div>
+
+                                    <small class="form-text text-muted">e.g. 20</small>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 shadow-sm document-page">
+                        <div class="card-body">
+                            <h2 class="h5 mb-3"><b>What Are You Quoting For?</b></h2>
+                            <div class="preset-ribbon d-flex flex-nowrap">
+
+                                <button class="preset-group-btn" ng-class="{'btn-primary' : vm.selectedPreset=='DEEP' }" ng-click="vm.loadPresets('DEEP')">Deep Cleaning</button>
+                                <button class="preset-group-btn" ng-class="{'btn-primary' : vm.selectedPreset=='REGULAR' }" ng-click="vm.loadPresets('REGULAR')">Regular Cleaning</button>
+                                <button class="preset-group-btn" ng-class="{'btn-primary' : vm.selectedPreset=='EOT' }" ng-click="vm.loadPresets('EOT')">E.O.T</button>
+                            </div>
+                            <div>
+                                <!--<p><b></b>Select from one of the preset property types or simply start adding spaces to your quote.</p>-->
+                                <div class="preset-ribbon d-flex flex-nowrap" ng-if="vm.selectedPreset=='DEEP'">
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 1}"
+                                         ng-click="vm.applyPreset('large')"
+                                         onclick="mixpanel.track('Domestic Calculator - Large Home Preset Clicked')">
+                                        <img src="../Images/v2/LARGE%20HOME-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Deep Clean (Large Family Home</div>
+                                    </div>
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 2}"
+                                         ng-click="vm.applyPreset('medium')"
+                                         onclick="mixpanel.track('Domestic Calculator - Medium Home Preset Clicked')">
+                                        <img src="../Images/v2/MEDIUM%20HOME-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Medium Family Home</div>
+                                    </div>
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 3}"
+                                         ng-click="vm.applyPreset('small')"
+                                         onclick="mixpanel.track('Domestic Calculator - Small Home Preset Clicked')">
+                                        <img src="../Images/v2/SMALL%20HOME-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Small Family Home</div>
+                                    </div>
+
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 4}"
+                                         ng-click="vm.applyPreset('largeflat')"
+                                         onclick="mixpanel.track('Domestic Calculator - Large Flat Preset Clicked')">
+                                        <img src="../Images/v2/LARGE%20FLAT-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Large Flat</div>
+                                    </div>
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 5}"
+                                         ng-click="vm.applyPreset('mediumflat')"
+                                         onclick="mixpanel.track('Domestic Calculator - Medium Flat Preset Clicked')">
+                                        <img src="../Images/v2/MEDIUM%20FLAT-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Medium Flat</div>
+                                    </div>
+
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 6}"
+                                         ng-click="vm.applyPreset('smallflat')"
+                                         onclick="mixpanel.track('Domestic Calculator - Small Flat Preset Clicked')">
+                                        <img src="../Images/v2/SMALL%20FLAT-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Small Flat</div>
+                                    </div>
+
+                                    <!-- Add more items here -->
+                                </div>
+                                <div class="preset-ribbon d-flex flex-nowrap" ng-if="vm.selectedPreset=='REGULAR'">
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 10}"
+                                         ng-click="vm.applyPreset('largeregular')"
+                                         onclick="mixpanel.track('Domestic Calculator - Regular Large Home Preset Clicked')">
+                                        <img src="../Images/v2/REGULAR%20LARGE%20HOME-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Regular (Large Home)</div>
+                                    </div>
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 11}"
+                                         ng-click="vm.applyPreset('mediumregular')"
+                                         onclick="mixpanel.track('Domestic Calculator - Regular Medium Home Preset Clicked')">
+                                        <img src="../Images/v2/REGULAR%20MEDIUM%20HOME-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Regular (Medium Family)</div>
+                                    </div>
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 12}"
+                                         ng-click="vm.applyPreset('smallregular')"
+                                         onclick="mixpanel.track('Domestic Calculator - Regular Small Home Preset Clicked')">
+                                        <img src="../Images/v2/REGULAR%20SMALL%20HOME-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Regular (Small Family)</div>
+                                    </div>
+
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 13}"
+                                         ng-click="vm.applyPreset('largeflatregular')"
+                                         onclick="mixpanel.track('Domestic Calculator - Regular Large Flat Preset Clicked')">
+                                        <img src="../Images/v2/REGULAR%20LARGE%20FLAT.jpg" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Regular (Large Flat)</div>
+                                    </div>
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 14}"
+                                         ng-click="vm.applyPreset('mediumflatregular')"
+                                         onclick="mixpanel.track('Domestic Calculator - Regular Medium Flat Preset Clicked')">
+                                        <img src="../Images/v2/REGULAR%20MEDIUM%20FLAT.jpg" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Regular (Medium Flat)</div>
+                                    </div>
+
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 15}"
+                                         ng-click="vm.applyPreset('smallflatregular')"
+                                         onclick="mixpanel.track('Domestic Calculator - Regular Small Flat Preset Clicked')">
+                                        <img src="../Images/v2/REGULAR%20SMALL%20FLAT.jpg" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Small Flat</div>
+                                    </div>
+
+                                    <!-- Add more items here -->
+                                </div>
+                                <div class="preset-ribbon d-flex flex-nowrap" ng-if="vm.selectedPreset=='EOT'">
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 7}"
+                                         ng-click="vm.applyPreset('standardeot')"
+                                         onclick="mixpanel.track('Domestic Calculator - Standard EOT Clicked')">
+                                        <img src="../Images/v2/STANDARD%20EOT-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Standard EOT</div>
+                                    </div>
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 8}"
+                                         ng-click="vm.applyPreset('afterbuildeot')"
+                                         onclick="mixpanel.track('Domestic Calculator - After Build EOT Clicked')">
+                                        <img src="../Images/v2/AFTERBUILD%20EOT-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">After Build EOT</div>
+                                    </div>
+
+                                    <div class="preset-item text-center"
+                                         ng-class="{'selected-preset': vm.preset == 9}"
+                                         ng-click="vm.applyPreset('sparklecleaneot')"
+                                         onclick="mixpanel.track('Domestic Calculator - Sparkle EOT Clicked')">
+                                        <img src="../Images/v2/SPARKLE%20CLEAN%20EOT-min.png" class="img-fluid rounded shadow-sm">
+                                        <div class="mt-2 font-weight-bold">Sparkle Clean EOT</div>
+                                    </div>
+                                    <!-- Add more items here -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h2 class="h5 mb-3"><b>Pricing</b></h2>
+                            <div class="table-scroll">
+                                <table class="table table-sm table-bordered mb-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th><b>Space</b></th>
+                                            <th class="text-right">Qty</th>
+                                            <th class="text-right">Mins/Unit</th>
+                                            <th>Difficulty</th>
+                                            <th class="text-right d-none d-md-table-cell">Total mins</th>
+                                            <th class="text-right d-none d-md-table-cell">Hours</th>
+                                            <th class="text-right d-none d-md-table-cell">Markup</th>
+                                            <th class="text-right">Line total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody ng-if="vm.lines.length">
+                                        <tr ng-repeat="l in vm.lines track by $index">
+                                            <td class="sticky-col first-col"><b>{{ l.space }}</b></td>
+                                            <td class="text-center" style="min-width:90px; position: relative; z-index: 1;">
+                                                <div class="input-group input-group-sm qty-stepper mx-auto">
+                                                    <!-- Decrease -->
+                                                    <div class="input-group-prepend">
+                                                        <button type="button"
+                                                                class="btn btn-outline-secondary btn-sm"
+                                                                ng-click="vm.decreaseQty(l)"
+                                                                ng-disabled="l.qty <= 1">
+                                                            −
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Input -->
+                                                    <input type="text" style="min-width:20px"
+                                                           min="1"
+                                                           step="1"
+                                                           class="form-control text-center"
+                                                           ng-model="l.qty"
+                                                           ng-change="vm.recalc()"
+                                                           ng-blur="l.qty = vm.validateQty(l.qty)"
+                                                           ng-focus="$event.target.select()">
+
+                                                    <!-- Increase -->
+                                                    <div class="input-group-append">
+                                                        <button type="button"
+                                                                class="btn btn-outline-secondary btn-sm"
+                                                                ng-click="vm.increaseQty(l)">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-right" style="min-width:120px;max-width:140px;">
+                                                <div class="input-group input-group-sm">
+                                                    <input type="number" min="5" step="5"
+                                                           class="form-control text-right"
+                                                           ng-model="l.minutesPerUnit" ng-change="vm.recalc()">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">mins</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <input type="range" class="custom-range" min="1" max="3" step="1"
+                                                           ng-model="l.difficulty" ng-change="vm.recalc()" style="width: 100%;min-width:80px">
+                                                    <span class="ml-2" ng-class="vm.diffBadge(l.difficulty)">
+                                                        {{ vm.diffLabel(l.difficulty) }}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td class="d-none d-md-table-cell text-right">{{ vm.totalMins(l) }}</td>
+                                            <td class="d-none d-md-table-cell text-right">{{ vm.hours(l) | number:2 }}</td>
+                                            <td class="d-none d-md-table-cell text-right">{{ (vm.markupRate(l)*100) | number:0 }}%</td>
+                                            <td class="text-right font-weight-bold">{{ vm.lineTotal(l) | currency:(vm.settings.currency.Id || '£') }}</td>
+                                            <td class="sticky-col last-col">
+                                                <button type="button" style="font-size:0.8em" class="btn btn-outline-danger btn-sm" ng-click="vm.deleteLine($index)">❌</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                    <tbody ng-if="!vm.lines.length">
+                                        <tr>
+                                            <td colspan="12" style="padding:20px;" class="text-center">
+                                                <h3><b>No Spaces Added Yet.</b></h3>
+                                                <p>Select a preset or add a new space to start.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="card-body">
+                            <h2 class="h5 mb-3"><b>Add a space</b></h2>
+                            <form class="form-row" ng-submit="vm.addLine()">
+                                <!--<div class="form-group col-md-4">
+                                    <label for="space">Space</label>
+                                    <input id="space" class="form-control" list="spaceOptions" placeholder="e.g. Bedroom" ng-model="vm.newLine.space" ng-change="vm.$watchAddForm()" required>
+                                    <datalist id="spaceOptions" datalist-sync="vm.spaceTypesMaster"></datalist>
+                                </div>-->
+                                <!-- Mobile: typeahead (reliable on phones) -->
+
+                                <div class="form-group col-md-4">
+                                    <label for="space-mobile">Space</label>
+                                    <input id="space-mobile"
+                                           type="text"
+                                           class="form-control"
+                                           placeholder="e.g. Bedroom"
+                                           ng-model="vm.newLine.space"
+                                           uib-typeahead="name for name in vm.spaceNames | filter:$viewValue | limitTo:30"
+                                           typeahead-editable="true"
+                                           typeahead-min-length="0"
+                                           typeahead-wait-ms="0"
+                                           typeahead-on-select="vm.$watchAddForm()"
+                                           ng-change="vm.$watchAddForm()"
+                                           autocomplete="off"
+                                           required>
+                                </div>
+
+                                <!-- Desktop/Tablet: select -->
+                                <!--<div class="form-group col-md-4 d-block d-md-none">
+                                    <label for="space-desktop">Space</label>
+                                    <select id="space-desktop"
+                                            class="form-control"
+                                            ng-model="vm.newLine.space"
+                                            ng-options="s.name as s.name for s in vm.spaceTypesMaster"
+                                            ng-change="vm.$watchAddForm()"
+                                            required>
+                                        <option value="">-- Select a space --</option>
+                                    </select>
+                                </div>-->
+
+
+
+                                <div class="form-group col-md-2">
+                                    <label for="qty">Quantity</label>
+                                    <input id="qty" type="number" class="form-control" min="1" step="1" ng-model="vm.newLine.qty" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="minutes">Minutes per unit</label>
+                                    <div class="input-group">
+                                        <input id="minutes" type="number" class="form-control" min="1" step="1"
+                                               ng-model="vm.newLine.minutesPerUnit" round-on-blur required>
+                                        <div class="input-group-append"><span class="input-group-text">mins</span></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Difficulty</label>
+                                    <input type="range" class="custom-range" min="1" max="3" step="1" ng-model="vm.newLine.difficulty">
+                                    <div class="d-flex justify-content-between slider-labels">
+                                        <span class="text-success">Easy</span>
+                                        <span class="text-warning">Medium</span>
+                                        <span class="text-danger">Hard</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 mt-2">
+                                    <button type="submit" ng-disabled="!vm.newLine.space" class="btn btn-primary" onclick="mixpanel.track('Domestic Calculator - Add Line Clicked')">Add line</button>
+                                    <button type="button" hidden class="btn btn-outline-secondary ml-2" ng-click="vm.clearLines()" ng-disabled="!vm.lines.length">Clear all</button>
+                                    <button type="button" hidden class="btn btn-outline-info ml-2" ng-click="vm.saveLocal()">Save</button>
+                                    <button type="button" hidden class="btn btn-outline-info ml-2" ng-click="vm.loadLocal()">Load</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <h2 class="h5">Summary</h2>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="d-flex justify-content-between"><span>Total minutes</span> <strong>{{ vm.grand.totalMins }}</strong></li>
+                                        <li class="d-flex justify-content-between"><span>Total hours</span> <strong>{{ vm.grand.totalHours | number:2 }} / {{vm.formatHoursToHM()}}</strong></li>
+                                        <li class="d-flex justify-content-between"><span>Hourly rate</span> <strong>{{ vm.settings.hourlyRate | currency:(vm.settings.currency.Id || '£') }}/hr</strong></li>
+                                        <li ng-if="vm.settings.vatRate" class="d-flex justify-content-between"><span>Tax ({{vm.settings.vatRate}}%)</span> <strong>{{ vm.grand.vat | currency:(vm.settings.currency.Id || '£') }}</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 text-md-right">
+
+                                    <div class="h5 mb-1">Total</div>
+                                    <div class="display-4"><b>{{ vm.grand.subtotal | currency:(vm.settings.currency.Id || '£') }}</b></div>
+
+                                    <div class="text-muted">Prices include difficulty markups per line.</div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--Personalise your quote -->
+                        <div class="card-body" ng-if="!vm.docId && vm.grand.subtotal > 0" ng-init="showQuoteSection=false;openRMQTab=false">
+                            <div class="row quote-section align-items-center"
+                                 ng-click="openRMQTab=!openRMQTab;vm.analyseCounty()" on-click="mixpanel.track('Domestic Cleaning Calculator - Rate my Quote Clicked')">
+
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <h3 class="mb-1"><b>Rate My Quote:</b> <span class="label label-info">Coming Soon!</span></h3>
+                                    <div class="text-muted">
+                                        Compare your quote against companies in your area, region and nationally to ensure you're charging the best price!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 d-flex justify-content-md-end justify-content-center align-items-center">
+                                    <img class="img-fluid quote-image"
+                                         src="../Images/analyze_my_quote.png"
+                                         alt="Quote Example">
+                                </div>
+
+                                <div class="col-md-12" ng-show="openRMQTab">
+                                    <hr />
+                                    <h5><b>See how your quote measures up...</b></h5>
+                                    <p>Our mission is to improve pricing across the <b>UK Cleaning sector</b>.</p>
+                                    <p>This starts with knowing if your price is too low. <b>Rate my Quote</b> will compare your pricing accross the industry and give you an indicator of where your quote sits.</p>
+                                    <i class="text-muted">*Note: Rate my Quote will not tell you how to quote, only compare your quote against sector averages.</i>
+                                    <div ng-show="vm.sampleSize > 20">
+                                        <hr />
+                                        <h3><b>Analysis <span class="label" style="border:solid 1px #ddd;background-color:#ff9898;padding:5px;border-radius:4px;color:#fff;font-size:0.8em">beta</span></b></h3>
+                                        <div style="font-size:1.2em; margin-top:10px;" ng-bind-html="vm.narrative">{{vm.narrative}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--Personalise your quote -->
+                        <div hidden class="card-body" ng-if="!vm.docId && vm.grand.subtotal > 0" ng-init="showQuoteSection=false">
+                            <div class="row quote-section align-items-center"
+                                 ng-click="vm.openPdfPreview2()" on-click="mixpanel.track('Domestic Cleaning Calculator - Optional Quote Section Clicked')">
+
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <h3 class="mb-1"><b>Optional: Insert Into Quote</b></h3>
+                                    <div class="text-muted">
+                                        Add your pricing into a professional quote you can send to your client,
+                                        yourself, or edit it to add more detail.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 d-flex justify-content-md-end justify-content-center align-items-center">
+                                    <img class="img-fluid quote-image"
+                                         src="../../../docflite.com/wp-content/uploads/2024/11/Quotes-On-brand-1.jpg"
+                                         alt="Quote Example">
+                                </div>
+                            </div>
+
+
+                            <div ng-if="showQuoteSection">
+                                <hr />
+                                <div class="" style="border:solid 1px #ddd;border-radius:4px;padding:20px;background-color:#cfe6ff">
+                                    <h2 class="h5 mb-3"><b><i class="fa-solid fa-wand-magic-sparkles"></i> Let AI Personalise Your Quote</b></h2>
+                                    <div class="small-muted">Tip: Enter your website and AI will write an 'about us' section, and populate your business details automatically</div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+
+                                            <input id="website" type="text" placeholder="Enter your website address e.g. perfectclean.co.uk" class="form-control" style="margin-top:10px;padding:20px;font-size:1.4em;font-weight:bold" ng-model="vm.companyUrl" ng-blur="vm.askCompany()">
+
+
+                                        </div>
+                                    </div>
+
+                                    <h2 class="h5 mb-3"><b>About {{sender.businessname || 'Your Business'}}</b> <i ng-if="vm.aiRunning" class="fa fa-spinner fa-spin"></i></b></h2>
+                                    <div class="small-muted">Tip: No website? Write some information about your business to build customer trust.</div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+
+                                            <textarea ng-model="vm.aboutUs" class="text-area" style="min-height:200px;margin-top:20px;padding-top:20px;border-top:solid 1px lightgrey"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- your details -->
+
+                                <div class="form-row" style="margin-top:20px;">
+
+                                    <div class="form-group col-md-6">
+                                        <h2 class="h5 mb-3"><b>Your Details</b></h2>
+                                        <div class="form-group">
+                                            <label for="recipientForename">Your Full Name</label>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-user"></i>
+                                                    </span>
+                                                </div>
+                                                <input id="recipientForename"
+                                                       type="text"
+                                                       class="form-control"
+                                                       required
+                                                       ng-model="vm.ownerName"
+                                                       placeholder="Enter your full name">
+                                                <div class="invalid-feedback">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="recipientForename">Your Business Name</label>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-user"></i>
+                                                    </span>
+                                                </div>
+                                                <input id="businessName"
+                                                       type="text"
+                                                       class="form-control"
+                                                       required
+                                                       ng-model="vm.businessName"
+                                                       placeholder="Enter business name">
+                                                <div class="invalid-feedback">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="recipientForename">Your Business Address</label>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-building-o"></i>
+                                                    </span>
+                                                </div>
+                                                <input id="businessName"
+                                                       type="text"
+                                                       class="form-control"
+                                                       required
+                                                       ng-model="vm.businessAddress"
+                                                       placeholder="Enter business address">
+                                                <div class="invalid-feedback">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <h2 class="h5 mb-3"><b>Client Details</b></h2>
+
+                                        <div class="form-group">
+                                            <label for="recipientForename">Client Forename*</label>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-user"></i>
+                                                    </span>
+                                                </div>
+                                                <input id="recipientForename"
+                                                       type="text"
+                                                       class="form-control"
+                                                       required
+                                                       ng-model="vm.recipientForename"
+                                                       placeholder="Enter forename">
+                                                <div class="invalid-feedback">
+                                                    Forename is required.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="recipientForename">Client Surname*</label>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-user"></i>
+                                                    </span>
+                                                </div>
+                                                <input id="recipientForename"
+                                                       type="text"
+                                                       class="form-control"
+                                                       required
+                                                       ng-model="vm.recipientSurname"
+                                                       placeholder="Enter surname">
+                                                <div class="invalid-feedback">
+                                                    Surname is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="recipientForename">Client Email*</label>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        📧
+                                                    </span>
+                                                </div>
+                                                <input id="recipientForename"
+                                                       type="email"
+                                                       class="form-control"
+                                                       required
+                                                       ng-model="vm.recipientEmail"
+                                                       placeholder="Enter email">
+                                                <div class="invalid-feedback">
+                                                    Email is required.
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!--<label>Address:</label>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-send"></i></span></div>
+                                            <input type="text" min="5" step="5" class="form-control" ng-model="client.address">
+                                        </div>-->
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-row">
+
+                                    <div class="col-md-12">
+                                        <hr />
+                                        <div class="mt-12">
+                                            <!--<button class="btn btn-outline-secondary mr-2" ng-click="vm.copyQuoteJson()">Copy JSON</button>
+                                            <button class="btn btn-success" ng-click="vm.downloadCSV()">Download CSV</button>-->
+
+
+                                            <span ng-if="vm.isLoggedIn()">
+                                                <button class="btn btn-success  btn-lg col-md-12" ng-click="vm.openCreateForm()" ng-disabled="!vm.lines.length"
+                                                        ng-if="!vm.docId" onclick="mixpanel.track('Domestic Calculator - Create Quote Clicked')">
+                                                    Create Quote
+                                                </button>
+                                                <button class="btn btn-primary  btn-lg col-md-12" ng-click="vm.openCreateForm()" ng-disabled="!vm.lines.length || vm.creatingItems" ng-if="vm.docId"
+                                                        onclick="mixpanel.track('Domestic Calculator - Insert Into Quote Clicked')">
+                                                    Insert Into Quote
+                                                </button>
+                                            </span>
+
+                                            <span ng-if="!vm.isLoggedIn()">
+
+                                                <button class="btn btn-success btn-lg col-md-12"
+                                                        ng-disabled="!vm.lines.length"
+                                                        ng-click="vm.openPdfPreview2()" onclick="mixpanel.track('Domestic Calculator - Convert to Quote Clicked')">
+                                                    Create Quote
+                                                </button>
+                                                <!--<button class="btn btn-success ml-2" ng-click="vm.openCreateForm()" ng-disabled="true" ng-if="!vm.docId">
+                                                    Create Quote (DocFlite Required)
+                                                </button>
+                                                <button class="btn btn-primary ml-2" ng-click="vm.createItemsOnly()" ng-disabled="true" ng-if="vm.docId">Insert Into Quote<div>(Login Required)</div></button>-->
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="position-fixed w-100 h-100" ng-if="vm.showCreateForm" style="top:0;left:0;background:rgba(0,0,0,.5);z-index:1050;">
+                    <div class="card shadow-lg" style="max-width:600px;margin:8vh auto;">
+                        <div class="card-header d-flex align-items-center">
+                            <h5 class="mb-0">Create Quote</h5>
+                            <button type="button" class="close ml-auto" ng-click="vm.cancelCreateForm()"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <form ng-if="vm.docId" ng-submit="vm.createItemsOnly()">
+                           
+                            <div class="form-group text-center" style="padding-top:20px">
+                                
+                                <h5><b>How do you want to show your prices?</b></h5>
+                                <!--<label class="form-label d-block mb-2"><strong>Display Mode</strong></label>-->
+
+                                <div class="btn-group" role="group" aria-label="Display Options">
+                                    <label class="btn btn-outline-primary"
+                                           ng-class="{'active': vm.showSummaryLineOnly === true}">
+                                        <input type="radio"
+                                               ng-model="vm.showSummaryLineOnly"
+                                               ng-value="true"
+                                               class="d-none" />
+                                        Summarised
+                                    </label>
+
+                                    <label class="btn btn-outline-primary"
+                                           ng-class="{'active': vm.showSummaryLineOnly === false}">
+                                        <input type="radio"
+                                               ng-model="vm.showSummaryLineOnly"
+                                               ng-value="false"
+                                               class="d-none" />
+                                        Show All Lines
+                                    </label>
+                                </div>
+                                <hr />
+                                <div ng-if="vm.showSummaryLineOnly">
+                                    A single line item, <b>Cleaning Services</b>, will be added to your quote with a total value.
+                                </div>
+                                <div ng-if="!vm.showSummaryLineOnly">
+                                    <div>Each line from your calculator will be added to your quote, with the number of spaces.</div>
+                                    <div>E.g <b>Bathrooms | 1</b>.</div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <button type="button" class="btn btn-outline-secondary mr-2" ng-click="vm.cancelCreateForm()">Cancel</button>
+                                <button type="submit" class="btn btn-success" ng-disabled="vm.creatingItems">Insert Into Quote</button>
+                            </div>
+                        </form>
+                        <form ng-if="!vm.docId" ng-submit="vm.submitCreateQuote()">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Template</label>
+                                    <div class="d-flex">
+
+                                        <select class="form-control" ng-model="vm.selectedTemplate"
+                                                ng-options="t as ('[' + t.UserDefinedDocumentType.Name + '] - ' + t.Description) for t in vm.templatesRaw" required style="flex:1;"></select>
+                                        <button type="button" class="btn btn-outline-secondary ml-2"
+                                                ng-click="vm.loadTemplates()" ng-disabled="vm.templatesLoading">
+                                            {{ vm.templatesLoading ? 'Loading…' : 'Refresh' }}
+                                        </button>
+                                    </div>
+                                    <small class="form-text text-muted" ng-if="!vm.templatesRaw.length && !vm.templatesLoading">No templates found. Refresh or check API.</small>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Forename</label>
+                                        <input type="text" required class="form-control" ng-model="vm.recipientForename">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Surname</label>
+                                        <input type="text" required class="form-control" ng-model="vm.recipientSurname">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" required class="form-control" ng-model="vm.recipientEmail">
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <button type="button" class="btn btn-outline-secondary mr-2" ng-click="vm.cancelCreateForm()">Cancel</button>
+                                <button type="submit" class="btn btn-primary" ng-disabled="vm.templatesLoading || !vm.templatesRaw.length || vm.creatingQuote">Create Quote <i class="fa-solid fa-spinner fa-spin" ng-if="vm.creatingQuote"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 d-none d-md-block col-lg-2">
+                    <div class="sidebar">
+                        <!--<div class="card mb-4">
+                            <div class="car-body text-center">
+
+                                <h5><b>📢 Create Pro-Quotes</b></h5>
+                                <p class="text-muted">Automate your all your Document Processes with DocFlite</p>
+                                <a onclick="mixpanel.track('Domestic Calculator - Choose Template Clicked')"
+                                   class="btn btn-outline-success"
+                                   href="/Creator/Index#/TemplateLibrary/76">Choose a Template</a>
+                            </div>
+                        </div>-->
+
+                        <div class="card mb-4">
+                            <div class="card-body text-center">
+                                <h5><b>DCBN Discount</b></h5>
+                                <img src="../../../dcbn.org.uk/wp-content/uploads/2021/10/DCBN-LOGO-1.html" style="width:100%;max-width:230px;" class="img-fluid rounded mb-2">
+                                <p class="text-muted">DCBN Members get a DocFlite discount on monthly subscription and setup.</p>
+                                <a target="_blank" href="https://docflite.com/dcbn" class="btn btn-outline-primary btn-sm">Learn More</a>
+                            </div>
+                        </div>
+                        <!--<div hidden class="card">
+                            <div class="card-body text-center video-wrapper">
+                                <iframe src="https://player.vimeo.com/video/980481667?badge=0&amp;autopause=0"
+                                        frameborder="0"
+                                        allow="autoplay; fullscreen; picture-in-picture"
+                                        style="width:100%; min-height:500px; height:100%;"
+                                        title="3 Tips to Faster Quotes">
+                                </iframe>
+                            </div>
+                        </div>-->
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Fixed Footer -->
+    <footer class="app-footer">
+        <div class="text-center" style="padding-top:10px;">
+
+            <div ng-if="vm.isLoggedIn()">
+                <button class="btn btn-success" style="width:90%;max-width:600px;" ng-click="vm.openCreateForm()" ng-disabled="!vm.lines.length"
+                        ng-if="!vm.docId" onclick="mixpanel.track('Domestic Calculator - Create Quote Clicked')">
+                    Create Quote
+                </button>
+                <button class="btn btn-success" ng-click="vm.openCreateForm()" ng-disabled="!vm.lines.length || vm.creatingItems" ng-if="vm.docId"
+                        onclick="mixpanel.track('Domestic Calculator - Insert Into Quote Clicked')">
+                    Insert Into Quote
+                </button>
+            </div>
+
+            <div ng-if="!vm.isLoggedIn()">
+
+                <button class="btn btn-success"
+                        ng-disabled="!vm.lines.length"
+                        ng-click="vm.openPdfPreview2()" onclick="mixpanel.track('Domestic Calculator - PDF Clicked')">
+                    Create Quote
+                </button>
+
+
+            </div>
+        </div>
+
+
+    </footer>
+
+    <script>
+        angular.module('cleaningApp', ['ui.bootstrap'])
+            .directive('roundOnBlur', function () {
+                return {
+                    require: 'ngModel',
+                    link: function (scope, el, attrs, ngModel) {
+                        el.on('blur', function () {
+                            scope.$apply(function () {
+                                const v = ngModel.$viewValue;
+                                if (v === '' || v === null || v === undefined) return; // keep blank
+                                const num = Number(v);
+                                if (Number.isNaN(num)) return; // non-numeric, do nothing
+                                const rounded = Math.round(num);
+                                ngModel.$setViewValue(rounded);
+                                ngModel.$render();
+                            });
+                        });
+                    }
+                };
+            })
+            .directive('datalistSync', function () {
+                return {
+                    restrict: 'A',
+                    scope: { source: '=datalistSync' },
+                    link: function (scope, el) {
+                        function render() {
+                            while (el[0] && el[0].firstChild) { el[0].removeChild(el[0].firstChild); }
+                            if (Array.isArray(scope.source)) {
+                                for (var i = 0; i < scope.source.length; i++) {
+                                    var item = scope.source[i] || {};
+                                    var option = document.createElement('option');
+                                    option.value = (item.name || '').toString();
+                                    el[0].appendChild(option);
+                                }
+                            }
+                        }
+                        scope.$watchCollection('source', function () { render(); });
+                        render();
+                    }
+                };
+            })
+            .controller('CalcCtrl', [
+                '$window',
+                '$http',
+                '$q',
+                '$scope',
+                '$interval',
+                '$sce',
+                function ($window, $http, $q, $scope, $interval, $sce) {
+                    var vm = this;
+
+                    vm.settings = { hourlyRate: 23, currency: { "Name": "GBP - Great British Pounds", "Id": "£", "Code": "GBP" } };
+                    vm.client = { forename: '', surname: '', email: '' };
+                    vm.showCreateForm = false;
+                    vm.selectedTemplateId = null;
+                    vm.templatesLoading = false;
+                    vm.templatesRaw = [];
+                    vm.templatesFiltered = [];
+                    vm.showSummaryLineOnly = true;  //when creating our quote, don't show everything.
+
+
+                    $scope.$watch('vm.showSummaryLineOnly', function (newVal) {
+                        console.log('Show Summary Line Only:', newVal);
+                        // trigger your UI update logic here
+                    });
+
+                    vm.defaultSpaceTypes = [
+                        { name: 'Hallway', minutes: 45 },
+                        { name: 'Living Room', minutes: 60 },
+                        { name: 'Conservatory', minutes: 120 },
+                        { name: 'Dining Room', minutes: 60 },
+                        { name: 'Kitchen', minutes: 180 },
+                        { name: 'Bathroom', minutes: 120 },
+                        { name: 'Toilet', minutes: 60 },
+                        { name: 'Utility', minutes: 60 },
+                        { name: 'Stairs & Landing', minutes: 45 },
+                        { name: 'Bedroom', minutes: 60 },
+                        { name: 'Office', minutes: 60 },
+
+                        { name: 'Oven', minutes: 75 },
+                        { name: 'Hob', minutes: 20 },
+                        { name: 'Fridge', minutes: 20 },
+                        { name: 'Freezer', minutes: 20 },
+                        { name: 'Tumble Dryer', minutes: 20 },
+                        { name: 'Window', minutes: 15 }
+
+                    ];
+
+                    vm.CurrencyList = [
+                        { Name: 'GBP - Great British Pounds', Id: '£', Code: 'GBP' },
+                        { Name: 'USD - United States Dollars', Id: '$', Code: 'USD' },
+                        { Name: 'CAD - Canadian Dollars', Id: '$', Code: 'CAD' },
+                        { Name: 'EUR - Euro', Id: '€', Code: 'EUR' },
+                        { Name: 'AUD - Australian Dollars', Id: '$', Code: 'AUD' },
+                        { Name: 'BDT - Bangladesh Taka', Id: '৳', Code: 'BDT' },
+                        { Name: 'BRL - Brazilian Real', Id: 'R$', Code: 'BRL' },
+                        { Name: 'IDR - Indonesian Rupiah', Id: 'Rp', Code: 'IDR' },
+                        { Name: 'INR - Indian Rupee', Id: '₹', Code: 'INR' },
+                        { Name: 'ZAR - South African Rand', Id: 'R', Code: 'ZAR' },
+                        { Name: 'KES - Kenyan Shillings', Id: 'Ksh', Code: 'KES' },
+                        { Name: 'MYR - Malaysian Ringgit', Id: 'RM', Code: 'MYR' },
+                        { Name: 'AED - United Arab Emirates Dirham', Id: 'AED', Code: 'AED' },
+                        { Name: 'OMR - Omani Riyal', Id: 'OMR', Code: 'OMR' },
+                        { Name: 'NGN - Nigerian Naira', Id: '₦', Code: 'NGN' },
+                        { Name: 'HKD - Hong Kong Dollar', Id: '$', Code: 'HKD' },
+                        { Name: 'SGD - Singapore Dollar', Id: '$', Code: 'SGD' },
+                        { Name: 'MXN - Mexican Peso', Id: 'Mex$', Code: 'MXN' },
+                        { Name: 'UGX - Ugandan Shilling', Id: 'USh', Code: 'UGX' },
+                    ];
+
+                    /*
+                    1 hour for each living room or bedroom
+                    2 hours per bathroom
+                    3 to 5 hours for a kitchen depending on size
+                    1 hour for a hall stairs & landing (2 if 3 storeys)
+                    1 hour for a downstairs loo
+                    1 to 2 hours for a utility room
+                    1 hour for luck
+                    */
+                    vm.spaceTypesMaster = angular.copy(vm.defaultSpaceTypes);
+                    vm.spaceTypesText = vm.spaceTypesMaster.map(function (s) { return s.name + ':' + s.minutes; }).join('\n');
+
+                    vm.spaceNames = (vm.spaceTypesMaster || []).map(function (s) { return s.name; });
+
+                    $scope.$watchCollection(function () { return vm.spaceTypesMaster; }, function (list) {
+                        vm.spaceNames = (list || []).map(function (s) { return s.name; });
+                    });
+
+
+                    vm.docId = null;
+                    vm._parseDocId = function (search) {
+                        var m = /[?&]doc=(\d+)/.exec(search || '');
+                        return m ? parseInt(m[1], 10) : null;
+                    };
+                    try {
+                        mixpanel.track('Domestic Calculator Loaded');
+                    }
+                    catch
+                    {
+
+                    }
+                    vm.docId = vm._parseDocId($window.location.search);
+
+                    vm.markups = { easy: 0, medium: 5, hard: 10 };
+
+                    vm.apiCreateUrl = 'https://app.docflite.com/Quote/CreateQuote';
+                    vm.apiCreateItemUrl = 'https://app.docflite.com/SingleCustomerPage/CreateItem';
+                    vm.apiTemplatesUrl = 'https://app.docflite.com/Templates/List?pageNumber=1&amp;pageSize=20';
+
+
+                    /* AUTH */
+                    vm.authCheckUrl = 'https://app.docflite.com/Account/GetLoggedIn'; // or '/account/status' in ASP.NET Core
+                    vm.auth = { isAuthenticated: false, name: null };
+
+                    //vm.loadLocal();
+
+                    vm.validateQty = function (qty) {
+                        var parsed = parseInt(qty, 10);
+                        if (isNaN(parsed) || parsed < 1) return 1;
+                        return parsed;
+                    };
+
+                    vm.decreaseQty = function (line) {
+                        line.qty = vm.validateQty(line.qty);
+                        if (line.qty > 1) line.qty -= 1;
+                        vm.recalc();
+                    };
+
+                    vm.increaseQty = function (line) {
+                        line.qty = vm.validateQty(line.qty) + 1;
+                        vm.recalc();
+                    };
+
+                    vm.formatHoursToHM = function () {
+
+                        decimalHours = vm.grand.totalHours;
+                        const hours = Math.floor(decimalHours);
+                        const minutes = Math.round((decimalHours - hours) * 60);
+                        return `${hours}h ${minutes}m`;
+                    }
+
+                    vm.fetchAuthStatus = function () {
+                        return $http.get(vm.authCheckUrl, { withCredentials: true })
+                            .then(function (r) {
+                                var d = r && r.data || {};
+                                vm.auth.isAuthenticated = !!(d.isAuthenticated || d.authenticated || d.IsAuthenticated);
+                                vm.auth.name = d.name || d.user || d.userName || null;
+                                return vm.auth.isAuthenticated;
+                            }, function () {
+                                vm.auth.isAuthenticated = false;
+                                vm.auth.name = null;
+                                return false;
+                            });
+                    };
+
+                    // open modal
+                    vm.openPdfPreview = function () {
+                        vm.previewDate = new Date();
+                        //vm.pdfEmail = '';
+                        $('#pdfModal').modal('show');
+                    };
+
+                    vm.openPdfPreview2 = function () {
+
+                        // we need to structure json into:
+                        // lets get the prcing models:
+
+
+                        var pricing =
+                        {
+                            Heading: 'Costing',
+                            Description: 'Cleaning Service',
+                            Quantity: 1,
+                            Price: vm.grand.subtotal
+                        };
+
+                        var pricingdetails = [];
+                        // detailed line
+                        for (var i = 0; i < vm.lines.length; i++) {
+                            var payload = {
+                                Description: vm.lines[i].space,
+                                Quantity: vm.lines[i].qty,
+                                Price: vm.lineTotal(vm.lines[i]) / vm.lines[i].qty
+                            };
+
+                            pricingdetails.push(payload);
+                        }
+
+
+                        var myJson = {
+                            logo: "Office Cleaning",
+                            pricing:
+                            {
+                                Heading: 'Costing',
+                                Description: 'Cleaning Service',
+                                Quantity: 1,
+                                Price: vm.grand.subtotal
+                            },
+                            pricingdetailed: pricingdetails,
+                            vat: vm.settings.vatRate,
+                            intro: vm.aboutUs?.startsWith('[ERROR]') ? null : vm.aboutUs,
+                            terms: 'Get This from the website + AI or use a link',
+                            companyname: vm.businessName,
+                            ownerName: vm.ownerName,
+                            companyAddress: vm.businessAddress,
+                            recipientForename: vm.recipientForename,
+                            recipientSurname: vm.recipientSurname,
+                            recipientEmail: vm.recipientEmail,
+                            currency: vm.settings.currency
+                        };
+
+                        // this json can be populated from a website or socials.
+                        var templateId = 90;    //depends on the cleaning type.
+                        var payload = encodeURIComponent(JSON.stringify(myJson));
+
+                        $window.location.href = "/Creator/Index#/TemplateLibrary/" + templateId + "?payload=" + payload;
+
+                        //$http.get("http://localhost/Creator/Index#/TemplateLibrary", {
+                        //    templateId: 76,
+                        //    payload: myJson
+                        //}).then(function (res) {
+                        //    console.log(res.data);
+                        //});
+                    }
+
+                    vm.toasts = [];
+
+                    // Show a toast
+                    vm.showToast = function (message, type) {
+                        vm.toasts.push({ message: message, type: type || 'info' });
+
+                        // Auto-remove after 4 seconds
+                        var index = vm.toasts.length - 1;
+                        setTimeout(function () {
+                            $scope.$apply(function () {
+                                vm.removeToast(index);
+                            });
+                        }, 4000);
+                    };
+
+                    // Remove a toast
+                    vm.removeToast = function (index) {
+                        if (index >= 0 && index < vm.toasts.length) {
+                            vm.toasts.splice(index, 1);
+                        }
+                    };
+
+
+
+
+
+                    vm.isLoggedIn = function () { return !!vm.auth.isAuthenticated; };
+
+                    // call once on load
+                    vm.fetchAuthStatus();
+
+
+
+                    vm.lines = [];
+                    vm.newLine = { space: '', qty: 1, minutesPerUnit: 30, difficulty: 1 };
+                    vm.deleteLine = function (index) {
+                        if (index >= 0 && index < vm.lines.length) {
+                            vm.lines.splice(index, 1);
+                            vm.recalc(); // update totals
+                        }
+                    };
+                    vm.diffLabel = function (val) { var v = parseInt(val, 10); if (v === 1) return 'Easy'; if (v === 2) return 'Medium'; return 'Hard'; };
+                    vm.diffBadge = function (val) { var v = parseInt(val, 10); if (v === 1) return 'badge badge-success'; if (v === 2) return 'badge badge-warning'; if (v === 3) return 'badge badge-danger'; return 'badge badge-secondary'; };
+
+                    vm.lookupMinutes = function (spaceName) {
+                        var target = String(spaceName || '').toLowerCase();
+                        if (!Array.isArray(vm.spaceTypesMaster)) return null;
+                        for (var i = 0; i < vm.spaceTypesMaster.length; i++) {
+                            var s = vm.spaceTypesMaster[i] || {};
+                            if (String(s.name || '').toLowerCase() === target) {
+                                return s.minutes;
+                            }
+                        }
+                        return null;
+                    };
+
+
+
+                    vm.loadPresets = function (presetGroup = 'DEEP') {
+                        vm.selectedPreset = presetGroup;
+
+                        if (presetGroup.toUpperCase() == 'ALL' || presetGroup.toUpperCase() == "DEEP") {
+                            vm.presets = {
+                                large: [
+                                    { space: "Bedroom", qty: 5, minutesPerUnit: vm.lookupMinutes("Bedroom") || 60, difficulty: 1 },
+                                    { space: "Bathroom", qty: 2, minutesPerUnit: vm.lookupMinutes("Bathroom") || 60, difficulty: 1 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 20, difficulty: 1 },
+                                    { space: "Living Room", qty: 2, minutesPerUnit: vm.lookupMinutes("Living Room") || 35, difficulty: 1 },
+                                    { space: "Office", qty: 1, minutesPerUnit: vm.lookupMinutes("Office") || 60, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: vm.lookupMinutes("Kitchen") || 120, difficulty: 1 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: vm.lookupMinutes("Hallway") || 25, difficulty: 1 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: vm.lookupMinutes("Utility") || 45, difficulty: 1 },
+                                    { space: "Stairs & Landing", qty: 1, minutesPerUnit: vm.lookupMinutes("Stairs & Landing") || 30, difficulty: 1 },
+                                    { space: "Oven", qty: 1, minutesPerUnit: vm.lookupMinutes("Oven") || 75, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: vm.lookupMinutes("Hob") || 20, difficulty: 1 },
+                                    { space: "Fridge", qty: 1, minutesPerUnit: vm.lookupMinutes("Fridge") || 20, difficulty: 1 },
+                                    { space: "Freezer", qty: 1, minutesPerUnit: vm.lookupMinutes("Freezer") || 20, difficulty: 1 },
+                                    { space: "Tumble Dryer", qty: 1, minutesPerUnit: vm.lookupMinutes("Tumble Dryer") || 20, difficulty: 1 },
+                                    { space: "Window", qty: 1, minutesPerUnit: vm.lookupMinutes("Tumble Dryer") || 15, difficulty: 1 },
+                                ],
+                                medium: [
+                                    { space: "Bedroom", qty: 3, minutesPerUnit: vm.lookupMinutes("Bedroom") || 60, difficulty: 1 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: vm.lookupMinutes("Bathroom") || 60, difficulty: 1 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: vm.lookupMinutes("Toilet") || 60, difficulty: 1 },
+                                    { space: "Living Room", qty: 2, minutesPerUnit: vm.lookupMinutes("Living Room") || 60, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: vm.lookupMinutes("Kitchen") || 120, difficulty: 1 },
+                                    { space: "Stairs & Landing", qty: 1, minutesPerUnit: vm.lookupMinutes("Stairs & Landing") || 30, difficulty: 1 },
+                                    { space: "Oven", qty: 1, minutesPerUnit: vm.lookupMinutes("Oven") || 75, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: vm.lookupMinutes("Hob") || 20, difficulty: 1 },
+                                    { space: "Fridge", qty: 1, minutesPerUnit: vm.lookupMinutes("Fridge") || 20, difficulty: 1 },
+                                    { space: "Freezer", qty: 1, minutesPerUnit: vm.lookupMinutes("Freezer") || 20, difficulty: 1 },
+                                    { space: "Tumble Dryer", qty: 1, minutesPerUnit: vm.lookupMinutes("Tumble Dryer") || 20, difficulty: 1 },
+                                    { space: "Window", qty: 1, minutesPerUnit: vm.lookupMinutes("Tumble Dryer") || 15, difficulty: 1 },
+                                ],
+                                small: [
+                                    { space: "Bedroom", qty: 3, minutesPerUnit: vm.lookupMinutes("Bedroom") || 60, difficulty: 1 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: vm.lookupMinutes("Bathroom") || 60, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: vm.lookupMinutes("Living Room") || 60, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: vm.lookupMinutes("Kitchen") || 120, difficulty: 1 },
+                                    { space: "Oven", qty: 1, minutesPerUnit: vm.lookupMinutes("Oven") || 75, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: vm.lookupMinutes("Hob") || 20, difficulty: 1 },
+                                    { space: "Fridge", qty: 1, minutesPerUnit: vm.lookupMinutes("Fridge") || 20, difficulty: 1 },
+                                    { space: "Freezer", qty: 1, minutesPerUnit: vm.lookupMinutes("Freezer") || 20, difficulty: 1 },
+                                    { space: "Tumble Dryer", qty: 1, minutesPerUnit: vm.lookupMinutes("Tumble Dryer") || 20, difficulty: 1 },
+                                    { space: "Window", qty: 1, minutesPerUnit: vm.lookupMinutes("Window") || 15, difficulty: 1 },
+                                ],
+                                largeflat: [
+                                    { space: "Bedroom", qty: 4, minutesPerUnit: vm.lookupMinutes("Bedroom") || 60, difficulty: 1 },
+                                    { space: "Bathroom", qty: 2, minutesPerUnit: vm.lookupMinutes("Bathroom") || 60, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: vm.lookupMinutes("Living Room") || 60, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: vm.lookupMinutes("Kitchen") || 120, difficulty: 1 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: vm.lookupMinutes("Hallway") || 15, difficulty: 1 },
+                                    { space: "Oven", qty: 1, minutesPerUnit: vm.lookupMinutes("Oven") || 75, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: vm.lookupMinutes("Hob") || 20, difficulty: 1 },
+                                    { space: "Fridge", qty: 1, minutesPerUnit: vm.lookupMinutes("Fridge") || 20, difficulty: 1 },
+                                    { space: "Freezer", qty: 1, minutesPerUnit: vm.lookupMinutes("Freezer") || 20, difficulty: 1 },
+                                    { space: "Tumble Dryer", qty: 1, minutesPerUnit: vm.lookupMinutes("Tumble Dryer") || 20, difficulty: 1 },
+                                    { space: "Window", qty: 10, minutesPerUnit: vm.lookupMinutes("Window") || 15, difficulty: 1 },
+
+
+                                ],
+                                mediumflat: [
+                                    { space: "Bedroom", qty: 2, minutesPerUnit: vm.lookupMinutes("Bedroom") || 60, difficulty: 1 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: vm.lookupMinutes("Bathroom") || 60, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: vm.lookupMinutes("Living Room") || 60, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: vm.lookupMinutes("Kitchen") || 120, difficulty: 1 },
+
+                                    { space: "Oven", qty: 1, minutesPerUnit: vm.lookupMinutes("Oven") || 75, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: vm.lookupMinutes("Hob") || 20, difficulty: 1 },
+                                    { space: "Fridge", qty: 1, minutesPerUnit: vm.lookupMinutes("Fridge") || 20, difficulty: 1 },
+                                    { space: "Freezer", qty: 1, minutesPerUnit: vm.lookupMinutes("Freezer") || 20, difficulty: 1 },
+                                    { space: "Tumble Dryer", qty: 1, minutesPerUnit: vm.lookupMinutes("Tumble Dryer") || 20, difficulty: 1 },
+                                    { space: "Window", qty: 6, minutesPerUnit: vm.lookupMinutes("Window") || 15, difficulty: 1 },
+
+
+                                ],
+                                smallflat: [
+                                    { space: "Bedroom", qty: 1, minutesPerUnit: vm.lookupMinutes("Bedroom") || 60, difficulty: 1 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: vm.lookupMinutes("Bathroom") || 60, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: vm.lookupMinutes("Living Room") || 60, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: vm.lookupMinutes("Kitchen") || 120, difficulty: 1 },
+
+                                    { space: "Oven", qty: 1, minutesPerUnit: vm.lookupMinutes("Oven") || 75, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: vm.lookupMinutes("Hob") || 20, difficulty: 1 },
+                                    { space: "Fridge", qty: 1, minutesPerUnit: vm.lookupMinutes("Fridge") || 20, difficulty: 1 },
+                                    { space: "Freezer", qty: 1, minutesPerUnit: vm.lookupMinutes("Freezer") || 20, difficulty: 1 },
+                                    { space: "Tumble Dryer", qty: 1, minutesPerUnit: vm.lookupMinutes("Tumble Dryer") || 20, difficulty: 1 },
+                                    { space: "Window", qty: 4, minutesPerUnit: vm.lookupMinutes("Window") || 15, difficulty: 1 },
+
+                                ]
+                            };
+                        }
+                        else if (presetGroup == 'REGULAR') {
+                            vm.presets = {
+                                largeregular: [
+                                    { space: "Bedroom", qty: 5, minutesPerUnit: 10, difficulty: 2 },
+                                    { space: "Bathroom", qty: 2, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Living Room", qty: 2, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 45, difficulty: 2 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 10, difficulty: 1 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Stairs & Landing", qty: 1, minutesPerUnit: 10, difficulty: 1 }
+                                ],
+                                mediumregular: [
+                                    { space: "Bedroom", qty: 3, minutesPerUnit: 10, difficulty: 2 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Living Room", qty: 2, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 45, difficulty: 2 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 10, difficulty: 1 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Stairs & Landing", qty: 1, minutesPerUnit: 10, difficulty: 1 }
+                                ],
+                                smallregular: [
+                                    { space: "Bedroom", qty: 3, minutesPerUnit: 10, difficulty: 1 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: 20, difficulty: 1 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: 20, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 45, difficulty: 1 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 10, difficulty: 1 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Stairs & Landing", qty: 1, minutesPerUnit: 10, difficulty: 1 }
+                                ],
+                                largeflatregular: [
+                                    { space: "Bedroom", qty: 4, minutesPerUnit: 10, difficulty: 2 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Living Room", qty: 2, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 45, difficulty: 2 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 10, difficulty: 1 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: 15, difficulty: 1 }
+
+                                ],
+                                mediumflatregular: [
+                                    { space: "Bedroom", qty: 3, minutesPerUnit: 10, difficulty: 2 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 45, difficulty: 2 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 10, difficulty: 1 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: 15, difficulty: 1 }
+
+
+                                ],
+                                smallflatregular: [
+                                    { space: "Bedroom", qty: 2, minutesPerUnit: 10, difficulty: 2 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 15, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: 20, difficulty: 2 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 45, difficulty: 2 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 10, difficulty: 1 }
+
+                                ]
+                            };
+                        }
+                        else if (presetGroup == 'EOT') {
+                            vm.presets = {
+                                standardeot: [
+                                    { space: "Bedroom", qty: 3, minutesPerUnit: 60, difficulty: 1 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: 120, difficulty: 1 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 60, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: 60, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 240, difficulty: 1 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 30, difficulty: 1 },
+                                    { space: "Conservatory", qty: 1, minutesPerUnit: 120, difficulty: 2 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: 120, difficulty: 1 },
+                                    { space: "Stairs & Landing", qty: 1, minutesPerUnit: 45, difficulty: 1 },
+                                    { space: "Oven", qty: 1, minutesPerUnit: 60, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: 30, difficulty: 1 },
+                                    { space: "Bonus Time", qty: 1, minutesPerUnit: 60, difficulty: 1 },
+
+                                ],
+                                afterbuildeot: [
+                                    { space: "Bedroom", qty: 3, minutesPerUnit: 90, difficulty: 1 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: 180, difficulty: 1 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 90, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: 90, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 240, difficulty: 1 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 45, difficulty: 1 },
+                                    { space: "Conservatory", qty: 1, minutesPerUnit: 180, difficulty: 2 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: 180, difficulty: 1 },
+                                    { space: "Stairs & Landing", qty: 1, minutesPerUnit: 45, difficulty: 1 },
+                                    { space: "Oven", qty: 1, minutesPerUnit: 60, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: 30, difficulty: 1 },
+                                    { space: "Bonus Time", qty: 1, minutesPerUnit: 90, difficulty: 1 },
+                                ],
+                                sparklecleaneot: [
+                                    { space: "Bedroom", qty: 3, minutesPerUnit: 30, difficulty: 1 },
+                                    { space: "Bathroom", qty: 1, minutesPerUnit: 60, difficulty: 1 },
+                                    { space: "Toilet", qty: 1, minutesPerUnit: 30, difficulty: 1 },
+                                    { space: "Living Room", qty: 1, minutesPerUnit: 90, difficulty: 1 },
+                                    { space: "Kitchen", qty: 1, minutesPerUnit: 120, difficulty: 1 },
+                                    { space: "Hallway", qty: 1, minutesPerUnit: 20, difficulty: 1 },
+                                    { space: "Conservatory", qty: 1, minutesPerUnit: 60, difficulty: 2 },
+                                    { space: "Utility", qty: 1, minutesPerUnit: 60, difficulty: 1 },
+                                    { space: "Stairs & Landing", qty: 1, minutesPerUnit: 20, difficulty: 1 },
+                                    { space: "Oven", qty: 1, minutesPerUnit: 60, difficulty: 1 },
+                                    { space: "Hob", qty: 1, minutesPerUnit: 30, difficulty: 1 },
+                                    { space: "Bonus Time", qty: 1, minutesPerUnit: 30, difficulty: 1 },
+                                ],
+                            }
+                        }
+                    }
+
+                    vm.loadPresets();
+                    vm.applyPreset = function (name) {
+                        if (vm.presets[name]) {
+                            vm.lines = angular.copy(vm.presets[name]);
+                            vm.recalc();
+                            if (name == 'large') {
+                                vm.preset = 1;
+                            }
+                            else if (name == 'medium') {
+                                vm.preset = 2;
+                            }
+                            else if (name == 'small') {
+                                vm.preset = 3;
+                            }
+                            else if (name == 'largeflat') {
+                                vm.preset = 4;
+                            }
+                            else if (name == 'mediumflat') {
+                                vm.preset = 5;
+                            }
+                            else if (name == 'smallflat') {
+                                vm.preset = 6;
+                            }
+                            else if (name == 'standardeot') {
+                                vm.preset = 7;
+                            }
+                            else if (name == 'afterbuildeot') {
+                                vm.preset = 8;
+                            }
+                            else if (name == 'sparklecleaneot') {
+                                vm.preset = 9;
+                            }
+
+                            if (name == 'largeregular') {
+                                vm.preset = 10;
+                            }
+                            else if (name == 'mediumregular') {
+                                vm.preset = 11;
+                            }
+                            else if (name == 'smallregular') {
+                                vm.preset = 12;
+                            }
+                            else if (name == 'largeflatregular') {
+                                vm.preset = 13;
+                            }
+                            else if (name == 'mediumflatregular') {
+                                vm.preset = 14;
+                            }
+                            else if (name == 'smallflatregular') {
+                                vm.preset = 15;
+                            }
+                        }
+                    };
+
+
+                    vm.getPresetName = function (presetId) {
+                        if (presetId == 1) {
+                            return 'large';
+                        }
+                        else if (presetId == 2) {
+                            return 'medium';
+                        }
+                        else if (presetId == 3) {
+                            return 'small';
+                        }
+                        else {
+                            return 'large';
+                        }
+                    }
+                    vm.$watchAddForm = function () {
+                        var mins = vm.lookupMinutes(vm.newLine.space);
+                        if (mins) vm.newLine.minutesPerUnit = mins;
+                    };
+
+                    vm.resetDefaults = function () {
+                        vm.settings.hourlyRate = 23; vm.markups = { easy: 0, medium: 5, hard: 10 }; vm.recalc();
+                        vm.spaceTypesMaster = angular.copy(vm.defaultSpaceTypes); vm.syncSpaceTypes();
+                    };
+
+                    vm.syncSpaceTypes = function () {
+                        var text = vm.spaceTypesText || '';
+                        var rows = text.split(/\n+/);
+                        var list = [];
+                        for (var i = 0; i < rows.length; i++) {
+                            var r = (rows[i] || '').trim();
+                            if (!r) continue;
+                            var parts = r.split(':');
+                            var name = (parts[0] || '').trim();
+                            var mins = parseInt((parts[1] || '').trim(), 10);
+                            if (!name) continue;
+                            if (!isFinite(mins) || mins <= 0) mins = 30;
+                            list.push({ name: name, minutes: mins });
+                        }
+                        if (list.length > 1) { vm.spaceTypesMaster = angular.copy(list); vm.spaceTypesText = vm.spaceTypesMaster.map(function (s) { return s.name + ':' + s.minutes; }).join('\n'); }
+                    };
+
+                    vm.addLine = function () {
+                        if (!vm.newLine.space || !vm.newLine.qty || !vm.newLine.minutesPerUnit) return;
+                        var minutes = vm.newLine.minutesPerUnit || vm.lookupMinutes(vm.newLine.space);
+                        var line = { space: vm.newLine.space, qty: parseInt(vm.newLine.qty, 10) || 1, minutesPerUnit: parseInt(minutes, 10), difficulty: parseInt(vm.newLine.difficulty, 10) || 2 };
+                        vm.lines.push(line);
+                        vm.newLine = { space: '', qty: 1, minutesPerUnit: minutes || 30, difficulty: 1 };
+                        vm.recalc();
+                    };
+
+                    vm.clearLines = function () { vm.lines = []; vm.recalc(); };
+
+                    vm.totalMins = function (l) {
+                        return Math.round((parseInt(l.qty, 10) || 0) * (parseInt(l.minutesPerUnit, 10) || 0) * (1 + vm.markupRate(l)));
+                    };
+                    vm.hours = function (l) { return vm.totalMins(l) / 60; };
+                    vm.baseCost = function (l) {
+                        return vm.hours(l) * (parseFloat(vm.settings.hourlyRate) || 0);
+                    };
+                    vm.markupRate = function (l) { var d = parseInt(l.difficulty, 10) || 2; if (d === 1) return (vm.markups.easy || 0) / 100; if (d === 2) return (vm.markups.medium || 0) / 100; if (d === 3) return (vm.markups.hard || 0) / 100; return (vm.markups.easy || 0) / 100; };
+                    vm.lineTotal = function (l) {
+                        return vm.baseCost(l);
+                    };
+
+                    vm.grand = { totalMins: 0, totalHours: 0, subtotal: 0, vat: 0 };
+                    vm.recalc = function () {
+                        var mins = 0, cost = 0; vat = 0;
+                        vm.lines.forEach(function (l) {
+                            mins += vm.totalMins(l);
+                            cost += vm.lineTotal(l);
+
+                        });
+                        vm.grand.totalMins = mins;
+                        vm.grand.totalHours = mins / 60;
+                        vm.grand.subtotal = cost;
+                        vat = (cost * ((100 + (vm.settings.vatRate || 0)) / 100)) - cost;
+                        vm.grand.vat = vat;
+                        vm.grand.subtotal = cost + vat;
+
+                        /*vm.saveToTableStore();*/
+                        vm.analyseCounty();
+                    };
+
+                    /**
+                    Connection String:
+                    BlobEndpoint=https://docflitecalculatordata.blob.core.windows.net/;QueueEndpoint=https://docflitecalculatordata.queue.core.windows.net/;FileEndpoint=https://docflitecalculatordata.file.core.windows.net/;TableEndpoint=https://docflitecalculatordata.table.core.windows.net/;SharedAccessSignature=sv=2024-11-04&ss=t&srt=sco&sp=rwdlacu&se=2026-06-01T00:27:23Z&st=2025-10-21T16:12:23Z&spr=https&sig=fqQtDV%2FVtk61zQhajuvsL0RBCmfZDoelAFDLzX4dbMQ%3D
+
+                    SAS Token:
+                    sv=2024-11-04&ss=t&srt=sco&sp=rwdlacu&se=2026-06-01T00:27:23Z&st=2025-10-21T16:12:23Z&spr=https&sig=fqQtDV%2FVtk61zQhajuvsL0RBCmfZDoelAFDLzX4dbMQ%3D
+
+                    Table SAS URL:
+                    https://docflitecalculatordata.table.core.windows.net/CalculatorUsage?sv=2024-11-04&ss=t&srt=sco&sp=rwdlacu&se=2026-06-01T00:27:23Z&st=2025-10-21T16:12:23Z&spr=https&sig=fqQtDV%2FVtk61zQhajuvsL0RBCmfZDoelAFDLzX4dbMQ%3D
+                    */
+                    vm.calculatorUsageUrl = 'https://docflitecalculatordata.table.core.windows.net/CalculatorUsage?sv=2024-11-04&amp;ss=t&amp;srt=sco&amp;sp=rwdlacu&amp;se=2026-08-01T01:41:10Z&amp;st=2025-10-21T17:26:10Z&amp;spr=https&amp;sig=DzVOfzmCKFzkyc%2BQvRO%2FD2SwI90Kl48aOh%2BGRC2ZWLI%3D';
+
+
+
+                    if (!localStorage.getItem('deviceId')) {
+                        localStorage.setItem('deviceId', crypto.randomUUID());
+                    }
+                    vm.deviceId = localStorage.getItem('deviceId');
+
+                    vm.getCountyData = function (county) {
+                        const tableUrl = "https://docflitecalculatordata.table.core.windows.net/CalculatorUsage?";
+                        const sas = "sv=2024-11-04&ss=t&srt=sco&sp=rwdlacu&se=2026-08-01T01:41:10Z&st=2025-10-21T17:26:10Z&spr=https&sig=DzVOfzmCKFzkyc%2BQvRO%2FD2SwI90Kl48aOh%2BGRC2ZWLI%3D"; // same SAS token
+
+                        // Filter: only UK + county name
+                        const filter = encodeURIComponent(`PartitionKey eq 'UK' and County eq '${county}'`);
+
+                        return fetch(`${vm.calculatorUsageUrl}`, {
+                            method: "GET",
+                            headers: {
+                                "Accept": "application/json;odata=nometadata"
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log("County results:", data.value);
+                                return data.value;
+                            });
+                    }
+
+                    vm.analyseCounty = function () {
+
+                        var county = vm.county;
+                        var city = vm.city;
+
+                        vm.getCountyData(county).then(records => {
+                            if (!records.length) return console.log("No records found");
+
+                            var myCountyRate = records.filter(r => r.County == county);
+                            var myCityRate = records.filter(r => r.City == city);
+
+                            // lets get county (regional) rates
+                            vm.countyAvgRate = myCountyRate.reduce((a, b) => a + b.HourlyRate, 0) / myCountyRate.length;
+                            vm.countyAvgPrice = myCountyRate.reduce((a, b) => a + b.Price, 0) / myCountyRate.length;
+                            vm.sampleSize = myCountyRate.length;
+
+                            // lets get city (local) rates
+                            vm.cityAvgRate = myCityRate.reduce((a, b) => a + b.HourlyRate, 0) / myCityRate.length;
+                            vm.cityAvgPrice = myCityRate.reduce((a, b) => a + b.Price, 0) / myCityRate.length;
+
+                            var higherThanCity = vm.settings.hourlyRate > vm.cityAvgRate; //false means that you've lower than average.
+                            var percentageDifferenceCity = ((vm.cityAvgRate - vm.settings.hourlyRate) / vm.cityAvgRate) * 100;   // + means you're rate is low. -ve means the avg is less than your price
+
+                            if (percentageDifferenceCity < 0) percentageDifferenceCity = percentageDifferenceCity * -1;
+
+
+                            var higherThanCounty = vm.settings.hourlyRate > vm.cityAvgRate; //false means that you've lower than average.
+                            var percentageDifferenceCounty = ((vm.countyAvgRate - vm.settings.hourlyRate) / vm.countyAvgRate) * 100;   // + means you're rate is low. -ve means the avg is less than your price
+                            if (percentageDifferenceCounty < 0) percentageDifferenceCounty = percentageDifferenceCounty * -1;
+
+                            vm.narrative = $sce.trustAsHtml(`<p>The average hourly rate for your city, <b>${city}</b>, is <b>${vm.settings.currency.Id}${Math.round(vm.cityAvgRate)}</b>.</p>` +
+                                `<p>The average hourly rate in your region, <b>${county}</b>, is <b>${vm.settings.currency.Id}${Math.round(vm.countyAvgRate)}</b>.</p>` +
+                                `<p>Your hourly rate is ` + (higherThanCity ? `📈 higher` : `📉 lower`) + ` than <b>${city}</b> by ` + `<b>${Math.round(percentageDifferenceCity)}%.</b>` +
+                                `<p>Your hourly rate is ` + (higherThanCounty ? `📈 higher` : `📉 lower`) + ` than <b>${county}</b> rate by ` + `<b>${Math.round(percentageDifferenceCounty)}%.`);
+
+
+                            /*
+                            The average hourly rate for your city, {city}, is {vm.cityAvgRate}. The average rate in you region, {county} is {{}}
+                            */
+
+                            //console.log(`📊 ${county} — Avg Rate: £${avgRate.toFixed(2)} | Avg Price: £${avgPrice.toFixed(2)}`);
+                        });
+                    }
+
+                    vm.saveToTableStore = function () {
+                        const tableUrl = vm.calculatorUsageUrl;
+
+                        // Azure Table expects PartitionKey and RowKey
+                        const entity = {
+                            PartitionKey: vm.country_code || "UK",
+                            RowKey: localStorage.getItem("deviceId") || crypto.randomUUID(),
+                            BuildingPreset: vm.preset || 1,
+
+                            County: vm.county,
+                            City: vm.city,
+                            HourlyRate: vm.settings.hourlyRate || 0,
+                            Price: vm.grand.subtotal || 0,
+                            VATRate: vm.vatRate || 0,
+                            CreatedAt: new Date().toISOString()
+                        };
+
+                        vm.lines.forEach(l => {
+                            const safeName = l.space.replace(/[^a-zA-Z0-9]/g, "_");
+                            entity[safeName] = l.qty;
+                            entity[safeName + '_price'] = vm.lineTotal(l) / l.qty;
+                            entity[safeName + '_minutes'] = l.minutesPerUnit;
+                        });
+
+                        saveUserCalculation(entity);
+                    }
+
+                    async function saveUserCalculation(entity) {
+                        const baseUrl = "https://docflitecalculatordata.table.core.windows.net/CalculatorUsage";
+                        const sasToken = "?sv=2024-11-04&ss=t&srt=sco&sp=rwdlacu&se=2026-08-01T01:41:10Z&st=2025-10-21T17:26:10Z&spr=https&sig=DzVOfzmCKFzkyc%2BQvRO%2FD2SwI90Kl48aOh%2BGRC2ZWLI%3D";
+                        const recordUrl = `${baseUrl}(PartitionKey='UK',RowKey='${entity.RowKey}')${sasToken}`;
+
+                        try {
+                            // 1️⃣ Try to GET the record
+                            const getResponse = await fetch(recordUrl, {
+                                method: "GET",
+                                headers: { "Accept": "application/json;odata=nometadata" }
+                            });
+
+                            if (getResponse.ok) {
+                                // 2️⃣ Record exists — MERGE (update)
+                                console.log("Record exists — updating...");
+                                const mergeResponse = await fetch(recordUrl, {
+                                    method: "MERGE",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "Accept": "application/json;odata=nometadata",
+                                        "If-Match": "*" // allow overwrite
+                                    },
+                                    body: JSON.stringify(entity)
+                                });
+
+                                if (mergeResponse.ok) {
+                                    console.log("✅ Record updated successfully");
+                                } else {
+                                    console.error("❌ MERGE failed:", mergeResponse.status, mergeResponse.statusText);
+                                }
+
+                            } else if (getResponse.status === 404) {
+                                // 3️⃣ Record not found — create new one
+                                console.log("No existing record — creating new...");
+                                const createResponse = await fetch(`${baseUrl}${sasToken}`, {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "Accept": "application/json;odata=nometadata"
+                                    },
+                                    body: JSON.stringify({
+                                        PartitionKey: "UK",
+                                        ...entity
+                                    })
+                                });
+
+                                if (createResponse.ok) {
+                                    console.log("✅ New record created successfully");
+                                } else {
+                                    console.error("❌ Create failed:", createResponse.status, createResponse.statusText);
+                                }
+
+                            } else {
+                                console.error("⚠️ Unexpected GET status:", getResponse.status);
+                            }
+
+                        } catch (err) {
+                            console.error("💥 Error saving record:", err);
+                        }
+                    }
+
+                    window.addEventListener("beforeunload", function () {
+                        vm.saveToTableStore();
+                    });
+
+                    vm.saveLocal = function (quiet = false) {
+                        var payload = {
+                            settings: vm.settings, lines: vm.lines, spaceTypes: vm.spaceTypesMaster,
+                            quoteOutro: vm.quoteOutro,
+                            quoteIntro: vm.quoteIntro,
+                            pdfEmail: vm.pdfEmail,
+                            showSummaryLineOnly: vm.showSummaryLineOnly,
+                            hard: vm.markups.hard,
+                            medium: vm.markups.medium,
+                            easy: vm.markups.easy,
+                            aboutUs: vm.aboutUs,
+                            businessName: vm.businessName,
+                            companyUrl: vm.companyUrl,
+                            ownerName: vm.ownerName,
+                            businessAddress: vm.businessAddress,
+                            city : vm.city,
+                            county : vm.county
+                        };
+
+                        //vm.loadPresets();
+                        $window.localStorage.setItem('cleaningCalc', JSON.stringify(payload)); if (!quiet) alert('Saved!');
+
+                        //vm.saveToTableStore();
+                        //mixpanel.track("Email sent to:" + vm.pdfEmail);
+                    };
+
+
+
+
+
+                    vm.loadLocal = function () {
+                        var raw = $window.localStorage.getItem('cleaningCalc'); if (!raw) { return; } try {
+                            var data = JSON.parse(raw);
+                            vm.settings = data.settings || vm.settings;
+                            vm.lines = Array.isArray(data.lines) ? data.lines : [];
+                            var loadedSpaces = Array.isArray(data.spaceTypes) && data.spaceTypes.length > 1 ? data.spaceTypes : vm.defaultSpaceTypes;
+                            vm.spaceTypesMaster = angular.copy(loadedSpaces); vm.spaceTypesText = vm.spaceTypesMaster.map(function (s) { return s.name + ':' + s.minutes; }).join('\n');
+                            vm.quoteOutro = data.quoteOutro;
+                            vm.quoteIntro = data.quoteIntro;
+                            vm.pdfEmail = data.pdfEmail;
+                            vm.showSummaryLineOnly = data.showSummaryLineOnly;
+                            vm.markups.hard = data.hard;
+                            vm.markups.medium = data.medium;
+                            vm.markups.easy = data.easy;
+                            vm.aboutUs = data.aboutUs;
+                            vm.businessName = data.businessName;
+                            vm.companyUrl = data.companyUrl;
+                            vm.ownerName = data.ownerName;
+                            vm.businessAddress = data.businessAddress;
+                            //vm.preset = data.preset || 1;
+                            vm.city = data.city;
+                            vm.county = data.county;
+                            //vm.applyPReset(vm.getPresetName(vm.preset));
+                            $http.get('https://ipapi.co/json')
+                                .then(function (res) {
+
+                                    // if we've not previously saved these, then get again
+                                    if (!vm.city) vm.city = res.data.city;
+                                    if (!vm.county) vm.county = res.data.region; // usually returns county or region
+
+                                    vm.country = res.data.country_name;
+                                    vm.country_code = res.data.country == 'GB' ? 'UK' : res.data.country;
+                                    vm.recalc();
+
+                                    if (vm.county) vm.analyseCounty();
+                                    vm.saveToTableStore();
+                                });
+
+
+                        } catch (e) { alert('Could not load saved data.'); }
+                    };
+
+                    // Start autosave timer
+                    vm.startAutosave = function () {
+                        if (vm.autosaveInterval) clearInterval(vm.autosaveInterval);
+                        vm.autosaveInterval = setInterval(() => vm.saveLocal(true), 1500); // every 5 seconds
+                    };
+
+                    // Stop autosave (optional, e.g. on destroy)
+                    vm.stopAutosave = function () {
+                        if (vm.autosaveInterval) clearInterval(vm.autosaveInterval);
+                    };
+
+                    // Initialize
+                    vm.init = function () {
+                        vm.loadLocal();
+                        vm.startAutosave();
+                        //vm.saveState(); // if you have undo/redo tracking
+                    };
+
+                    vm.init();
+                    // Hook into Angular lifecycle
+                    $scope.$on('$destroy', vm.stopAutosave);
+
+                    vm.quoteObject = function () {
+                        var items = vm.lines.map(function (l) {
+                            return { space: l.space, quantity: l.qty, minutesPerUnit: l.minutesPerUnit, difficulty: vm.diffLabel(l.difficulty), difficultyMarkupRate: vm.markupRate(l), hours: vm.hours(l), baseCost: vm.baseCost(l), lineTotal: vm.lineTotal(l) };
+                        }); return { currency: 'GBP', hourlyRate: vm.settings.hourlyRate, items: items, totals: { totalMinutes: vm.grand.totalMins, totalHours: vm.grand.totalHours, subtotal: vm.grand.subtotal } };
+                    };
+
+                    vm.buildQuoteFormModel = function () {
+                        var d = new Date().toISOString();
+                        var notes = ['Hourly rate: ' + (parseFloat(vm.settings.hourlyRate) || 0).toFixed(2)];
+                        for (var i = 0; i < vm.lines.length; i++) {
+                            var l = vm.lines[i]; notes.push((i + 1) + '. ' + (l.space || '') + ' x' + (l.qty || 0) + ' @ ' + (l.minutesPerUnit || 0) + ' mins, ' + vm.diffLabel(l.difficulty) + ', Line Total: ' + vm.settings.currencyId + vm.lineTotal(l).toFixed(2));
+                        } notes.push('Subtotal ' + vm.settings.currency.Id + ": " + vm.grand.subtotal.toFixed(2)); return { JobId: null, CustomerId: null, CustomerCompanyId: null, Description: 'Domestic Quote ' + d, Customer: '', Job: '', JobNotes: '', DocumentNotes: notes.join('\n'), Title: null, Forename: vm.recipientForename || '', Surname: vm.recipientSurname || '', Email: vm.recipientEmail || '', CopyFrom: vm.selectedTemplate.QuoteId, JobStartDate: '', JobEndDate: '', CompanyDescription: '', CreateCustomerCompany: false, IsTemplate: false, DocumentType: 9, SuppressInvoice: null, CustomDocumentType: vm.selectedTemplate.UserDefinedDocumentType.Id || null, CustomDocumentState: null, DocumentId: 0, FirstAction: 0, ContactType: null };
+                    };
+
+                    vm.copyQuoteJson = function () { var json = JSON.stringify(vm.buildQuoteFormModel(), null, 2); var ta = document.createElement('textarea'); ta.value = json; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); alert('Quote JSON copied to clipboard.'); } catch (e) { alert('Copy failed.'); } document.body.removeChild(ta); };
+
+                    vm._buildCSVString = function () { var header = ['Space', 'Qty', 'Minutes per unit', 'Difficulty', 'Total minutes', 'Hours', 'Hourly rate', 'Markup %', 'Base cost', 'Line total']; var rows = vm.lines.map(function (l) { var safe = '"' + String(l.space || '').replace(/\"/g, '\"\"') + '"'; return [safe, l.qty, l.minutesPerUnit, vm.diffLabel(l.difficulty), vm.totalMins(l), vm.hours(l).toFixed(2), (parseFloat(vm.settings.hourlyRate) || 0).toFixed(2), (vm.markupRate(l) * 100).toFixed(0) + '%', vm.baseCost(l).toFixed(2), vm.lineTotal(l).toFixed(2)].join(','); }); var totals = ['"TOTALS"', '', '', '', vm.grand.totalMins, vm.grand.totalHours.toFixed(2), (parseFloat(vm.settings.hourlyRate) || 0).toFixed(2), '', '', vm.grand.subtotal.toFixed(2)].join(','); return [header.join(','), rows.join('\n'), totals].join('\n'); };
+                    vm.downloadCSV = function () { var csv = vm._buildCSVString(); var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); var url = URL.createObjectURL(blob); var a = document.createElement('a'); a.href = url; a.download = 'cleaning-quote.csv'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); };
+
+                    vm.openCreateForm = function () { vm.showCreateForm = true; vm.loadTemplates(); };
+                    vm.cancelCreateForm = function () { vm.showCreateForm = false; };
+
+                    vm._buildItemPayload = function (l, s) {
+                        var q = parseFloat(l.qty) || 0;
+                        q = vm.hours(l);
+                        var price = vm.settings.hourlyRate;
+                        //parseFloat(vm.lineTotal(l).toFixed(2));
+                        var desc = (l.space || '') + ' - ' + vm.diffLabel(l.difficulty) + ' x' + q + ' @ ' + (l.minutesPerUnit || 0) + ' mins';
+                        return { Description: desc, Quantity: q, Price: price, ItemSectionId: s };
+                    };
+
+                    vm._buildItemPayloadForTemplateLib = function (l, s) {
+                        var q = parseFloat(l.qty) || 0;
+                        q = parseFloat(vm.hours(l).toFixed(2));
+                        var price = vm.settings.hourlyRate;
+                        //parseFloat(vm.lineTotal(l).toFixed(2));
+                        var desc = (l.space || '') + ' - ' + vm.diffLabel(l.difficulty) + ' x' + q + ' @ ' + (l.minutesPerUnit || 0) + ' mins';
+                        desc = l.space;
+                        return { Description: desc + ' (' + l.qty + ')', Quantity: q, Price: price, ItemSectionId: s };
+
+                    };
+                    vm.createItemsForQuote = function (itemSectionId) {
+                        if (!vm.lines.length) {
+                            return $q.resolve();
+                        }
+
+                        var reqs = [];
+
+                        if (vm.showSummaryLineOnly) {
+                            var payload = { Description: 'Cleaning Service', Quantity: 1, Price: (vm.grand.subtotal-(vm.grand.vat || 0)) , ItemSectionId: itemSectionId };
+                            reqs.push($http.post(vm.apiCreateItemUrl, payload, { headers: { 'Content-Type': 'application/json' } }));
+                        }
+                        else {
+                            for (var i = 0; i < vm.lines.length; i++) {
+
+
+                                var payload = vm._buildItemPayloadForTemplateLib(vm.lines[i], itemSectionId);
+
+                                reqs.push($http.post(vm.apiCreateItemUrl, payload, { headers: { 'Content-Type': 'application/json' } }));
+                            }
+                        }
+                        return $q.all(reqs);
+                    };
+
+                    vm.storage = {
+                        set: function (key, value) {
+                            try { $window.localStorage.setItem(key, JSON.stringify(value)); } catch (e) { }
+                        },
+                        get: function (key, def) {
+                            try { var raw = $window.localStorage.getItem(key); return raw ? JSON.parse(raw) : def; } catch (e) { return def; }
+                        },
+                        remove: function (key) { $window.localStorage.removeItem(key); }
+                    };
+
+                    // restore on init
+                    vm.settings.hourlyRate = vm.storage.get('hourlyRate', vm.settings.hourlyRate || 23);
+
+                    // auto-save whenever it changes
+                    $scope.$watch(
+                        function () { return vm.settings.hourlyRate; },
+                        function (newVal, oldVal) {
+                            if (newVal === oldVal) return;
+                            if (newVal !== undefined && newVal !== null) {
+                                vm.storage.set('hourlyRate', newVal);
+                            }
+                        }
+                    );
+                    vm.createItemsOnly = function () {
+                        // if we already have a quoteId, try and add it there!
+                        if (vm.docId) {
+                            vm.creatingItems = true;
+                            // just do the item add with quote get
+                            var urlGet = vm.apiGetDocument || '/Builder/Get/' + vm.docId;
+                            /*return $http.get(urlGet, payload, { headers: { 'Content-Type': 'application/json' } })*/
+                            return $http.get(urlGet)
+                                .then(function (doc) {
+                                    var sectionId = doc.data.Data.goods.collections[0].id;
+
+                                    return vm.createItemsForQuote(sectionId).then(function () {
+                                        //alert('Items Added to you DocFlite Document. Opening Document');
+                                        $window.location.href = "/SingleCustomerPage/Index#/Builder/" + doc.data.Data.meta.id;
+
+                                        //vm.creatingItems = false; vm.showCreateForm = false;
+                                    }, function () { alert('Quote created but adding items failed'); });
+                                });
+                        }
+                    }
+
+                    vm.createQuoteWithPayload = function (payload) {
+                        // if we already have a quoteId, try and add it there!
+                        vm.creatingQuote = true;
+                        var url = vm.apiCreateUrl || 'https://app.docflite.com/Quote/CreateQuote';
+                        return $http.post(url, payload, { headers: { 'Content-Type': 'application/json' } })
+                            .then(function (r) {
+                                var urlGet = vm.apiGetDocument || '/Builder/Get/' + r.data.RecordId;
+                                /*return $http.get(urlGet, payload, { headers: { 'Content-Type': 'application/json' } })*/
+                                return $http.get(urlGet)
+                                    .then(function (doc) {
+                                        var sectionId = doc.data.Data.goods.collections[0].id;
+
+                                        var i = vm.createItemsForQuote(sectionId).then(function () { alert('Quote created and items added'); vm.showCreateForm = false; }, function () { alert('Quote created but adding items failed'); });
+                                        $window.location.href = "/SingleCustomerPage/Index#/Builder/" + doc.data.Data.meta.id;
+
+                                    });
+                            }, function () { alert('Failed to create quote'); vm.creatingQuote = false; });
+                    };
+                    vm.submitCreateQuote = function () { var payload = vm.buildQuoteFormModel(); if (!payload.Forename || !payload.Email) { alert('Please enter forename and email'); return; } if (!vm.selectedTemplate) { alert('Please choose a template'); return; } vm.createQuoteWithPayload(payload); };
+
+                    vm._arrayifyTemplates = function (res) { if (Array.isArray(res)) return res; if (res && Array.isArray(res.items)) return res.items; if (res && Array.isArray(res.Data)) return res.Data; return []; };
+                    vm.filterTemplates = function () {
+                        var rows = vm._arrayifyTemplates(vm.templatesRaw) || []; var out = [];
+                        for (var i = 0; i < rows.length; i++) {
+                            var t = rows[i] || {}; var uds = Array.isArray(t.UserDefinedDocumentTypes) ? t.UserDefinedDocumentTypes : [];
+                            var ok = false;
+                            var name = String(t.UserDefinedDocumentType.Name).toLowerCase();
+                            if (name === 'quote' || name === 'proposal') {
+                                out.push(t)
+                            }
+                            //for (var j = 0; j < uds.length; j++) {
+                            //    var n = (uds[j] && uds[j].Name) || '';
+                            //    var name = String(n).toLowerCase(); if (name === 'Quote' || name === 'Proposal') {
+                            //        ok = true; break;
+                            //    }
+                            //} if (ok) out.push(t);
+                        }
+                        vm.templatesFiltered = out; if (!vm.selectedTemplateId && out.length) vm.selectedTemplateId = out[0].QuoteId || null;
+                    };
+                    vm.loadTemplates = function () {
+                        vm.templatesLoading = true; vm.templatesFiltered = []; vm.selectedTemplate = null;
+                        $http.get(vm.apiTemplatesUrl)
+                            .then(function (r) {
+                                vm.templatesRaw = r.data.Data.Items;
+                                //vm.filterTemplates();
+                            },
+                                function () {
+                                    vm.templatesRaw = []; vm.templatesFiltered = [];
+                                })
+                            .finally(function (r) {
+                                vm.templatesLoading = false;
+                            });
+                    };
+
+                    vm.testResults = [];
+                    function addResult(name, passed, message) { vm.testResults.push({ name: name, passed: !!passed, message: message || '' }); }
+                    vm.runTests = function () {
+                        vm.testResults = [];
+                        try {
+                            var initialCount = vm.spaceTypesMaster.length;
+                            vm.newLine = { space: vm.spaceTypesMaster[0].name, qty: 1, minutesPerUnit: vm.spaceTypesMaster[0].minutes, difficulty: 2 };
+                            vm.addLine();
+                            var afterAddCount = vm.spaceTypesMaster.length;
+                            addResult('Master list remains same length after add', afterAddCount === initialCount, 'Expected ' + initialCount + ', got ' + afterAddCount);
+
+                            var pickName = vm.spaceTypesMaster[1].name;
+                            var pickMins = vm.spaceTypesMaster[1].minutes;
+                            vm.newLine = { space: pickName, qty: 1, minutesPerUnit: 1, difficulty: 1 };
+                            vm.$watchAddForm();
+                            addResult('Minutes default from master on selection', vm.newLine.minutesPerUnit === pickMins, 'Expected ' + pickMins + ', got ' + vm.newLine.minutesPerUnit);
+
+                            vm.settings.hourlyRate = 20;
+                            var testLine = { space: 'Test', qty: 2, minutesPerUnit: 30, difficulty: 2 };
+                            var base = vm.baseCost(testLine);
+                            var total = vm.lineTotal(testLine);
+                            addResult('Calc: base cost = hours*rate (1*20)', Math.abs(base - 20) < 1e-6, 'Got ' + base.toFixed(2));
+                            addResult('Calc: medium markup 5% => 21', Math.abs(total - 21) < 1e-6, 'Got ' + total.toFixed(2));
+
+                            var originalMaster = angular.copy(vm.spaceTypesMaster);
+                            vm.spaceTypesText = 'OnlyOne:15';
+                            vm.syncSpaceTypes();
+                            addResult('Manage Space Types ignores single entry', vm.spaceTypesMaster.length === originalMaster.length, 'Master changed unexpectedly');
+
+                            var dl = document.getElementById('spaceOptions');
+                            var optionCount = dl ? dl.querySelectorAll('option').length : 0;
+                            addResult('Datalist options match master length', optionCount === vm.spaceTypesMaster.length, 'Options ' + optionCount + ' vs master ' + vm.spaceTypesMaster.length);
+
+                            var beforeSubtotal = vm.grand.subtotal;
+                            if (vm.lines.length) { var line0 = vm.lines[0]; var prevQty = line0.qty; line0.qty = prevQty + 1; vm.recalc(); addResult('Editing qty updates subtotal', vm.grand.subtotal > beforeSubtotal, 'Subtotal did not increase'); line0.qty = prevQty; vm.recalc(); } else { addResult('Editing qty updates subtotal', true, 'No lines to test; skipped'); }
+
+                            if (vm.lines.length) { var l = vm.lines[0]; var baseBefore = vm.baseCost(l); l.minutesPerUnit = l.minutesPerUnit + 10; vm.recalc(); var baseAfter = vm.baseCost(l); addResult('Editing minutes increases base cost', baseAfter > baseBefore, 'Base did not increase'); l.minutesPerUnit = l.minutesPerUnit - 10; vm.recalc(); } else { addResult('Editing minutes increases base cost', true, 'No lines to test; skipped'); }
+
+                            if (vm.lines.length) { var l2 = vm.lines[0]; l2.difficulty = 1; vm.recalc(); var easyTotal = vm.lineTotal(l2); l2.difficulty = 3; vm.recalc(); var hardTotal = vm.lineTotal(l2); addResult('Hard difficulty > Easy difficulty total', hardTotal > easyTotal, 'Expected hard > easy'); } else { addResult('Hard difficulty > Easy difficulty total', true, 'No lines to test; skipped'); }
+
+                            var csvStr = vm._buildCSVString();
+                            var hasHeader = csvStr.indexOf('Space,Qty,Minutes per unit,Difficulty,Total minutes,Hours,Hourly rate,Markup %,Base cost,Line total') === 0;
+                            addResult('CSV contains header', hasHeader, 'Header missing');
+                            var hasTotals = /\n"TOTALS",/.test(csvStr);
+                            addResult('CSV has totals row', hasTotals, 'Totals row missing');
+
+                            var payload = vm.quoteObject();
+                            addResult('Payload items match lines', Array.isArray(payload.items) && payload.items.length === vm.lines.length, 'Mismatch items count');
+                            addResult('Payload currency GBP', payload.currency === 'GBP', 'Unexpected currency');
+                            addResult('Payload hourly matches settings', payload.hourlyRate === vm.settings.hourlyRate, 'Hourly mismatch');
+
+                            var qfm = vm.buildQuoteFormModel();
+                            var today = new Date().toISOString().slice(0, 10);
+                            addResult('QuoteFormModel Description default', qfm.Description === ('Domestic Quote ' + today), 'Description incorrect');
+                            var notesHasSubtotal = typeof qfm.DocumentNotes === 'string' && qfm.DocumentNotes.indexOf('Subtotal: £') !== -1;
+                            addResult('QuoteFormModel DocumentNotes includes Subtotal', notesHasSubtotal, 'Subtotal missing');
+
+                            vm.recipientForename = 'Jane'; vm.recipientSurname = 'Doe'; vm.recipientEmail = 'jane@example.com';
+                            vm.selectedTemplateId = 101;
+                            var qfm2 = vm.buildQuoteFormModel();
+                            addResult('QuoteFormModel carries Forename', qfm2.Forename === 'Jane', 'Forename missing');
+                            addResult('QuoteFormModel carries Surname', qfm2.Surname === 'Doe', 'Surname missing');
+                            addResult('QuoteFormModel carries Email', qfm2.Email === 'jane@example.com', 'Email missing');
+                            addResult('QuoteFormModel sets CustomDocumentType from selection', qfm2.CustomDocumentType === 101, 'CustomDocumentType missing');
+                            vm.showCreateForm = false; vm.openCreateForm();
+                            addResult('Open form toggles flag', vm.showCreateForm === true, 'Flag not set');
+                            vm.cancelCreateForm();
+                            addResult('Cancel form toggles flag off', vm.showCreateForm === false, 'Flag not unset');
+
+                            var mockTemplates = [
+                                { QuoteId: 1, Description: 'A', UserDefinedDocumentTypes: [{ Name: 'Quote' }] },
+                                { QuoteId: 2, Description: 'B', UserDefinedDocumentTypes: [{ Name: 'Other' }] },
+                                { QuoteId: 3, Description: 'C', UserDefinedDocumentTypes: [{ Name: 'Proposal' }] }
+                            ];
+                            vm.templatesRaw = mockTemplates;
+                            vm.filterTemplates();
+                            addResult('Template filter keeps only Quote/Proposal', vm.templatesFiltered.length === 2, 'Filtered count ' + vm.templatesFiltered.length);
+                        } catch (err) { var msg = String(err && (err.stack || err.message) || err); addResult('Unexpected error during tests', false, msg); }
+                    };
+
+                    vm.recalc();
+
+                    // AI
+                    //vm.companyUrl = "";
+                    //vm.question = "";
+                    //vm.answer = "";
+                    vm.lastResponseId = null;
+
+                    vm.askCompany = function () {
+                        if (vm.aiRunning || !vm.companyUrl) return;
+
+                        var post = {
+                            Url: cleanUrl(vm.companyUrl),
+                            Question: "Write a short, concise about us summary for my website. Only give me one option. highlight our strengths." || vm.question,
+                            PreviousResponseId: vm.lastResponseId
+                        };
+
+                        function cleanUrl(url) {
+                            if (!url) return null;
+
+                            // remove leading http:// or https://
+                            url = url.replace(/^https?:\/\//i, "");
+
+                            // remove leading www.
+                            url = url.replace(/^www\./i, "");
+
+                            // add back http://
+                            return "http://" + url;
+                        }
+
+                        vm.aiRunning = true;
+                        $http.post("/AiCompany/AskCompanyQuestion", post)
+                            .then(function (res) {
+                                vm.aiRunning = false;
+                                if (res.data.error) {
+                                    vm.aboutUs = "[ERROR]: Error: " + res.data.error;
+                                } else {
+                                    var result = JSON.parse(res.data.answer);
+                                    vm.aboutUs = result.answer;
+                                    vm.businessName = result.businessName;
+                                    vm.lastResponseId = res.data.responseId;
+
+                                    // set business deets
+                                    if (result.businessAddress) vm.businessAddress = result.businessAddress;
+                                    if (result.ownerName) vm.ownerName = result.ownerName;
+                                    if (result.businessAddress) vm.businessAddress = result.businessAddress;
+
+
+                                    vm.saveLocal(true);
+
+                                }
+                            }, function (err) {
+                                vm.aiRunning = false;
+                                vm.aboutUs = "[ERROR]: API call failed";
+                            });
+                    };
+                }
+            ]);
+    </script>
+    <script>
+        window.intercomSettings = {
+            api_base: "https://api-iam.intercom.io",
+            app_id: "ejvcwmgp"
+        };
+
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings = { hjid: 906523, hjsv: 6 };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script'); r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+
+    <script>
+        (function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/ejvcwmgp'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (document.readyState === 'complete') { l(); } else if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();
+    </script>
+</body>
+
+<!-- Mirrored from app.docflite.com/Calculators/RCQ/Calculator.html?utm-source=fb&utm_medium=dcbn-page&fbclid=IwZnRzaAQNWzpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEe-VMiencb2q4N21FWxk5ACp0uJ2n4WEWhqWcrPRaUlOz-qGT9g2M-kpvawLc_aem_4FS5t1_FAilXy23rlD7R1g by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2026 13:44:02 GMT -->
+</html>
