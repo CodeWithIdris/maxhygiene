@@ -110,11 +110,11 @@
             border-radius: 4px;
         }
 
-        .bg-squiggles {
+        .bg-squiggles 
             --bg: #f5f7fa; /* page background */
             --tile: 50px; /* pattern size (smaller = denser) */
             background-color: var(--bg);
-            background-image: url("data:image/svg+xml;utf8,\
+            background-image: url("data:image/svg+xml;utf8),
         <svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'>\
           <rect width='240' height='240' fill='none'/>\
           <g stroke='%2390a4b8' stroke-opacity='0.25' stroke-width='2' fill='none' stroke-linecap='round'>\
@@ -130,7 +130,7 @@
         </svg>");
             background-size: var(--tile) var(--tile);
             background-attachment: fixed; /* optional: nice parallax feel */
-        }
+        
 
         /* Dark mode variant (auto) */
         /*@media (prefers-color-scheme: dark) {
@@ -525,8 +525,8 @@
                     <div class="d-flex flex-column align-items-center">
                         <!-- Logo -->
                         <img id="logo"
-                             src="../../Images/DocFlite-Logo-Transparent.png"
-                             alt="DocFlite Logo"
+                             src="../../Images/MaxHygiene-Logo-Transparent.png"
+                             alt="MaxHygiene Logo"
                              style="height:60px;width:auto;margin-bottom:10px;"
                              class="img-responsive selectable" />
 
@@ -536,9 +536,9 @@
                         <!-- Powered by + user info -->
                         <div class="mt-2">
                             <span class="badge badge-info">
-                                Powered by <b>DocFlite</b> (v0.5)
+                                Powered by <b>MaxHygiene</b> (v0.5)
                             </span>
-                            <a href="https://app.docflite.com/"
+                            <a href="https://app.maxhygiene.com/"
                                class="badge badge-info ml-2"
                                ng-if="vm.isLoggedIn()">
                                 {{vm.auth.name}}
