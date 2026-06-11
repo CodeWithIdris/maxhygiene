@@ -1349,11 +1349,11 @@
 
 
                                             <span ng-if="vm.isLoggedIn()">
-                                                <button class="btn btn-success  btn-lg col-md-12" ng-click="vm.openPdfPreview2()" ng-disabled="!vm.lines.length"
+                                                <button class="btn btn-success  btn-lg col-md-12" ng-click="vm.openPdfPreview()" ng-disabled="!vm.lines.length"
                                                         ng-if="!vm.docId" onclick="mixpanel.track('Domestic Calculator - Create Quote Clicked')">
                                                     Create Quote
                                                 </button>
-                                                <button class="btn btn-primary  btn-lg col-md-12" ng-click="vm.openPdfPreview2()" ng-disabled="!vm.lines.length || vm.creatingItems" ng-if="vm.docId"
+                                                <button class="btn btn-primary  btn-lg col-md-12" ng-click="vm.openPdfPreview()" ng-disabled="!vm.lines.length || vm.creatingItems" ng-if="vm.docId"
                                                         onclick="mixpanel.track('Domestic Calculator - Insert Into Quote Clicked')">
                                                     Insert Into Quote
                                                 </button>
@@ -1363,7 +1363,7 @@
 
                                                 <button class="btn btn-success btn-lg col-md-12"
                                                         ng-disabled="!vm.lines.length"
-                                                        ng-click="vm.openPdfPreview2()" onclick="mixpanel.track('Domestic Calculator - Convert to Quote Clicked')">
+                                                        ng-click="vm.openPdfPreview()" onclick="mixpanel.track('Domestic Calculator - Convert to Quote Clicked')">
                                                     Create Quote
                                                 </button>
                                                 <!--<button class="btn btn-success ml-2" ng-click="vm.openCreateForm()" ng-disabled="true" ng-if="!vm.docId">
