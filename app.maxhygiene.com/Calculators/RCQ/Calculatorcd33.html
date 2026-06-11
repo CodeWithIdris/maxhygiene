@@ -1509,7 +1509,7 @@
         <div class="text-center" style="padding-top:10px;">
 
             <div ng-if="vm.isLoggedIn()">
-                <button class="btn btn-success" style="width:90%;max-width:600px;" ng-click="vm.openPdfPreview2()" ng-disabled="!vm.lines.length"
+                <button class="btn btn-success" style="width:90%;max-width:600px;" ng-click="vm.openPdfPreview()" ng-disabled="!vm.lines.length"
                         ng-if="!vm.docId" onclick="mixpanel.track('Domestic Calculator - Create Quote Clicked')">
                     Create Quote
                 </button>
@@ -1523,7 +1523,7 @@
 
                 <button class="btn btn-success"
                         ng-disabled="!vm.lines.length"
-                        ng-click="vm.openPdfPreview2()" onclick="mixpanel.track('Domestic Calculator - PDF Clicked')">
+                        ng-click="vm.openPdfPreview()" onclick="mixpanel.track('Domestic Calculator - PDF Clicked')">
                     Create Quote
                 </button>
 
