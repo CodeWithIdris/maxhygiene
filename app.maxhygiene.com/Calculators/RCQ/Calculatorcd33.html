@@ -110,7 +110,7 @@
             border-radius: 4px;
         }
 
-        .bg-squiggles 
+        .bg-squiggles{ 
             --bg: #f5f7fa; /* page background */
             --tile: 50px; /* pattern size (smaller = denser) */
             background-color: var(--bg);
@@ -130,28 +130,29 @@
         </svg>");
             background-size: var(--tile) var(--tile);
             background-attachment: fixed; /* optional: nice parallax feel */
-        
+        }
+    
 
         /* Dark mode variant (auto) */
-        /*@media (prefers-color-scheme: dark) {
+        @media (prefers-color-scheme: dark) {
             .bg-squiggles {
                 --bg: #0f172a;
-                background-image: url("data:image/svg+xml;utf8,\
-        <svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'>\
-          <rect width='240' height='240' fill='none'/>\
-          <g stroke='%23cbd5e1' stroke-opacity='0.12' stroke-width='2' fill='none' stroke-linecap='round'>\
-            <path d='M-20 40 C 20 10, 60 70, 100 40 S 180 10, 220 40'/>\
-            <path d='M-20 100 C 20 70, 60 130, 100 100 S 180 70, 220 100'/>\
-            <path d='M-20 160 C 20 130, 60 190, 100 160 S 180 130, 220 160'/>\
-            <path d='M-20 220 C 20 190, 60 250, 100 220 S 180 190, 220 220'/>\
-            <path d='M20 -20 C 50 20, -10 60, 20 100 S 50 180, 20 220'/>\
-            <path d='M80 -20 C 110 20, 50 60, 80 100 S 110 180, 80 220'/>\
-            <path d='M140 -20 C 170 20, 110 60, 140 100 S 170 180, 140 220'/>\
-            <path d='M200 -20 C 230 20, 170 60, 200 100 S 230 180, 200 220'/>\
-          </g>\
-        </svg>");
+                background-image: url("data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'>\
+                <rect width='240' height='240' fill='none'/>\
+                <g stroke='%23cbd5e1' stroke-opacity='0.12' stroke-width='2' fill='none' stroke-linecap='round'>\
+                    <path d='M-20 40 C 20 10, 60 70, 100 40 S 180 10, 220 40'/>\
+                    <path d='M-20 100 C 20 70, 60 130, 100 100 S 180 70, 220 100'/>\
+                    <path d='M-20 160 C 20 130, 60 190, 100 160 S 180 130, 220 160'/>\
+                    <path d='M-20 220 C 20 190, 60 250, 100 220 S 180 190, 220 220'/>\
+                    <path d='M20 -20 C 50 20, -10 60, 20 100 S 50 180, 20 220'/>\
+                    <path d='M80 -20 C 110 20, 50 60, 80 100 S 110 180, 80 220'/>\
+                    <path d='M140 -20 C 170 20, 110 60, 140 100 S 170 180, 140 220'/>\
+                    <path d='M200 -20 C 230 20, 170 60, 200 100 S 230 180, 200 220'/>\
+                </g>\
+                </svg>");
             }
-        }*/
+        }
 
         .video-wrapper {
             height: 100%;
@@ -242,13 +243,13 @@
         }
 
         /* Dark-mode friendly default (optional) */
-        /*@media (prefers-color-scheme: dark) {
+        @media (prefers-color-scheme: dark) {
             :root {
                 --glass-bg: rgba(22,22,28,.72);
                 --glass-border: rgba(255,255,255,.08);
                 --shadow: 0 6px 18px rgba(0,0,0,.35);
             }
-        }*/
+        }
 
         .app-header,
         .app-footer {
@@ -306,6 +307,62 @@
         }
     </style>
     <style>
+    quote-modal{
+        display:none;
+        position:fixed;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,.7);
+        z-index:9999;
+    }
+
+    .quote-modal-content{
+        background:white;
+        width:90%;
+        max-width:700px;
+        margin:40px auto;
+        padding:30px;
+        border-radius:15px;
+        max-height:90vh;
+        overflow:auto;
+    }
+
+    .close-modal{
+        float:right;
+        font-size:30px;
+        cursor:pointer;
+    }
+
+    .form-group{
+        margin-bottom:15px;
+    }
+
+    .form-group label{
+        display:block;
+        margin-bottom:6px;
+        font-weight:600;
+    }
+
+    .form-group input,
+    .form-group textarea{
+        width:100%;
+        padding:12px;
+        border:1px solid #ddd;
+        border-radius:8px;
+    }
+
+    .generate-btn{
+        background:#22c55e;
+        color:white;
+        padding:14px 20px;
+        border:none;
+        border-radius:8px;
+        cursor:pointer;
+        width:100%;
+    }
+
         .table-scroll {
             overflow-x: auto;
             overflow-y: visible;
@@ -1781,12 +1838,14 @@
                         };
 
                         // this json can be populated from a website or socials.
+                        window.pendingQuoteData = myJson;
+                        openQuoteModal();
                         
-                        localStorage.setItem(
+                        /*localStorage.setItem(
                             "maxhygieneQuote",
                             JSON.stringify(myJson)
                         );
-                        $window.location.href = "/app.maxhygiene.com/quote.html";
+                        $window.location.href = "/app.maxhygiene.com/quote.html";*/
 
                         //$http.get("http://localhost/Creator/Index#/TemplateLibrary", {
                         //    templateId: 76,
@@ -2768,6 +2827,91 @@
                     };
                 }
             ]);
+            function openQuoteModal(){
+
+                document.getElementById("quoteModal")
+                    .style.display = "block";
+
+                loadCompanyProfile();
+            }
+
+            function closeQuoteModal(){
+
+                document.getElementById("quoteModal")
+                    .style.display = "none";
+            }
+
+            function loadCompanyProfile(){
+
+                const profile =
+                JSON.parse(
+                    localStorage.getItem("companyProfile")
+                );
+
+                if(!profile) return;
+
+                document.getElementById("companyName").value =
+                    profile.name || "";
+
+                document.getElementById("companyPhone").value =
+                    profile.phone || "";
+
+                document.getElementById("companyEmail").value =
+                    profile.email || "";
+
+                document.getElementById("companyAddress").value =
+                    profile.address || "";
+            }
+
+            function generateQuote(){
+
+                const company = {
+
+                    name:
+                    document.getElementById("companyName").value,
+
+                    phone:
+                    document.getElementById("companyPhone").value,
+
+                    email:
+                    document.getElementById("companyEmail").value,
+
+                    address:
+                    document.getElementById("companyAddress").value
+                };
+
+                const client = {
+
+                    name:
+                    document.getElementById("clientName").value,
+
+                    email:
+                    document.getElementById("clientEmail").value,
+
+                    phone:
+                    document.getElementById("clientPhone").value
+                };
+
+                localStorage.setItem(
+                    "companyProfile",
+                    JSON.stringify(company)
+                );
+
+                const quote =
+                    window.pendingQuoteData;
+
+                quote.company = company;
+
+                quote.client = client;
+
+                localStorage.setItem(
+                    "maxhygieneQuote",
+                    JSON.stringify(quote)
+                );
+
+                window.location.href =
+                "/app.maxhygiene.com/quote.html";
+            }
     </script>
     <script>
         window.intercomSettings = {
@@ -2788,6 +2932,63 @@
     <script>
         (function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/ejvcwmgp'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (document.readyState === 'complete') { l(); } else if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();
     </script>
+
+
+    <!-- Quote Modal -->
+
+<div id="quoteModal" class="quote-modal">
+
+    <div class="quote-modal-content">
+
+        <span class="close-modal" onclick="closeQuoteModal()">&times;</span>
+
+        <h2>Create Professional Quote</h2>
+
+        <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" id="companyName">
+        </div>
+
+        <div class="form-group">
+            <label>Company Phone</label>
+            <input type="text" id="companyPhone">
+        </div>
+
+        <div class="form-group">
+            <label>Company Email</label>
+            <input type="email" id="companyEmail">
+        </div>
+
+        <div class="form-group">
+            <label>Company Address</label>
+            <textarea id="companyAddress"></textarea>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <label>Client Name</label>
+            <input type="text" id="clientName">
+        </div>
+
+        <div class="form-group">
+            <label>Client Email</label>
+            <input type="email" id="clientEmail">
+        </div>
+
+        <div class="form-group">
+            <label>Client Phone</label>
+            <input type="text" id="clientPhone">
+        </div>
+
+        <button class="generate-btn"
+                onclick="generateQuote()">
+            Generate Quote
+        </button>
+
+    </div>
+
+</div>
 </body>
 
 <!-- Mirrored from app.docflite.com/Calculators/RCQ/Calculator.html?utm-source=fb&utm_medium=dcbn-page&fbclid=IwZnRzaAQNWzpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEe-VMiencb2q4N21FWxk5ACp0uJ2n4WEWhqWcrPRaUlOz-qGT9g2M-kpvawLc_aem_4FS5t1_FAilXy23rlD7R1g by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2026 13:44:02 GMT -->
