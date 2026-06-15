@@ -2835,6 +2835,8 @@
             ]);
             function openQuoteModal(){
 
+                window.pendingQuoteData = {};
+            
                 document.getElementById("quoteModal")
                     .style.display = "block";
 
@@ -2871,6 +2873,8 @@
 
             function generateProfessionalQuote(){
 
+                alert("Generate button clicked");
+
                 const company = {
 
                     name:
@@ -2904,9 +2908,9 @@
                 );
 
                 const quote =
-                    window.pendingQuoteData;
+                    window.pendingQuoteData || {};
 
-                quote.company = company;
+                quote.company = company;   
 
                 quote.client = client;
 
@@ -2976,6 +2980,7 @@
 
             <button
                 class="generate-btn"
+                type="button"
                 onclick="generateProfessionalQuote()">
 
                 Generate Quote
