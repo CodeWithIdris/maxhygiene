@@ -39,13 +39,9 @@ body{
 /* HEADER */
 
 .header{
-    background:linear-gradient(135deg,#0f172a,#1e293b);
+    background:#2f66c7;
     color:white;
-    padding:40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
+    padding:25px 40px;
 }
 
 .company-name{
@@ -59,13 +55,11 @@ body{
 }
 
 .quote-badge{
-    background:#22c55e;
+    background:#2f66c7;
     color:white;
-    padding:12px 24px;
-    border-radius:40px;
-    font-weight:700;
-    font-size:14px;
-    letter-spacing:1px;
+    border-radius:0;
+    font-size:18px;
+    padding:15px 30px;
 }
 
 /* CONTENT */
@@ -125,10 +119,9 @@ table{
 }
 
 th{
-    background:#0f172a;
-    color:white;
-    padding:15px;
-    text-align:left;
+    background:#f3f4f6;
+    color:#111827;
+    border:1px solid #d1d5db;
 }
 
 td{
@@ -149,9 +142,9 @@ tr:hover{
 }
 
 .summary-card{
-    background:#f8fafc;
+    background:white;
+    border:1px solid #d1d5db;
     padding:25px;
-    border-radius:12px;
 }
 
 .summary-row{
@@ -161,9 +154,12 @@ tr:hover{
 }
 
 .grand-total{
-    font-size:28px;
+    font-size:32px;
     font-weight:800;
-    color:#22c55e;
+    color:#111827;
+}
+.grand-total span:last-child{
+    color:#111827;
 }
 
 /* TERMS */
@@ -278,7 +274,7 @@ button:hover{
 <div class="quote-card" id="quoteDocument">
 
 <div class="header">
-     <div>
+     <div class="company-block">
 
         <img id="companyLogo" style=" height:70px; margin-bottom:15px; display:none;">
 
@@ -288,7 +284,7 @@ button:hover{
     </div>
 
     <div class="quote-badge">
-        QUOTATION
+        QUOTE
     </div>
 
 </div>
@@ -506,11 +502,20 @@ const items =
 
 items.forEach(item => {
 
+    const qty =
+    Number(item.Quantity || item.quantity || 1);
+
+    const price =
+    Number(item.Price || item.price || 0);
+
+    const amount =
+    (qty * price).toFixed(2);
     html += `
         <tr>
             <td>${item.Description || item.description || ""}</td>
-            <td>${item.Quantity || item.quantity || ""}</td>
-            <td>${item.Price || item.price || ""}</td>
+            <td>${qty}</td>
+            <td>${price.toFixed(2)}</td>
+            <td>${amount}</td>
         </tr>
     `;
 });
@@ -518,13 +523,13 @@ items.forEach(item => {
 document.getElementById("quoteLines").innerHTML = html;
 
     const subtotal =
-        quote.pricing.Price;
+        Number(quote.pricing.Price).toFixed(2);
 
     const vat =
         quote.vat || 0;
 
     const grandTotal =
-        subtotal;
+        Number(subtotal).toFixed(2);
 
     document.getElementById("subtotal").innerHTML =
         `${quote.currency.Id}${subtotal}`;
