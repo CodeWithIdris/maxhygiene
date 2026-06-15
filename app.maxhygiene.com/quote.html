@@ -229,6 +229,22 @@ button:hover{
     font-size:14px;
 }
 
+.customer-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:40px;
+    margin:40px 0;
+}
+
+.customer-block h4{
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+.customer-block p{
+    margin-bottom:6px;
+}
+
 @media(max-width:768px){
 
     .header{
@@ -260,6 +276,27 @@ button:hover{
         box-shadow:none;
     }
 
+}
+
+.invoice-total{
+    width:260px;
+    margin-left:auto;
+    margin-top:15px;
+}
+
+.total-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.total-table td{
+    border:1px solid #bdbdbd;
+    padding:10px;
+}
+
+.total-row{
+    font-weight:bold;
+    font-size:20px;
 }
 
 
@@ -315,56 +352,78 @@ button:hover{
 
 
     </div>
+    <div class="customer-row">
 
-    <div class="section-title">
-        Prepared For
-    </div>
-
-    <div class="client-card" id="customer"></div>
-
-    <div class="section-title">
-        Service Details
-    </div>
-
-    <table>
-
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Unit Price</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-
-        <tbody id="quoteLines"></tbody>
-
-    </table>
-
-    <div class="summary">
-
-        <div class="summary-card">
-
-            <div class="summary-row">
-                <span>Subtotal</span>
-                <span id="subtotal"></span>
+            <div class="customer-block">
+                <h4>Bill To</h4>
+                <div id="customer"></div>
             </div>
 
-            <div class="summary-row">
-                <span>VAT</span>
-                <span id="vat"></span>
+            <div class="customer-block">
+                <h4>Service Address</h4>
+                <div id="serviceAddress">
+                    Cleaning Service
+                </div>
             </div>
 
-            <hr style="margin:15px 0;">
+            <div class="customer-block">
+                <h4>Quote Info</h4>
 
-            <div class="summary-row grand-total">
-                <span>Total</span>
-                <span id="quoteTotal"></span>
+                <p>
+                    <strong>Quote #</strong>
+                    <span id="quoteNumberCopy"></span>
+                </p>
+
+                <p>
+                    <strong>Date</strong>
+                    <span id="quoteDateCopy"></span>
+                </p>
             </div>
 
         </div>
 
-    </div>
+            <div class="section-title">
+                Service Details
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody id="quoteLines"></tbody>
+
+            </table>
+
+            <div class="invoice-total">
+
+            <table class="total-table">
+
+                <tr>
+                    <td>Subtotal</td>
+                    <td id="subtotal"></td>
+                </tr>
+
+                <tr>
+                    <td>VAT</td>
+                    <td id="vat"></td>
+                </tr>
+
+                <tr class="total-row">
+                    <td>TOTAL</td>
+                    <td id="quoteTotal"></td>
+                </tr>
+
+            </table>
+
+        </div>
+            </div>
 
     <div class="terms">
 
@@ -383,6 +442,14 @@ button:hover{
         <p>
             Any additional services requested outside this quotation may incur additional charges.
         </p>
+
+    </div>
+
+    <div style="text-align:right;margin-top:30px;">
+
+        <img
+            src="signature.png"
+            style="height:90px;">
 
     </div>
 
@@ -428,6 +495,7 @@ const quote =
 JSON.parse(
 localStorage.getItem("maxhygieneQuote")
 );
+
 
 const expiry =
 new Date();
@@ -476,6 +544,12 @@ if(quote){
 
     document.getElementById("quoteNumber").innerHTML =
         quoteNumber;
+    
+    document.getElementById("quoteNumberCopy").innerHTML =
+        quoteNumber;
+    
+    document.getElementById("quoteDateCopy").innerHTML =
+        new Date().toLocaleDateString();
 
     document.getElementById("quoteDate").innerHTML =
         new Date().toLocaleDateString();
