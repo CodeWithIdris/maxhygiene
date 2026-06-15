@@ -1821,6 +1821,7 @@
                         }
 
 
+                        
                         var myJson = {
                             logo: "Office Cleaning",
                             pricing:
@@ -1846,6 +1847,7 @@
                         // this json can be populated from a website or socials.
                         window.pendingQuoteData = myJson;
                         openQuoteModal();
+                        return;
                         
                         /*localStorage.setItem(
                             "maxhygieneQuote",
@@ -2836,11 +2838,11 @@
             function openQuoteModal(){
 
                 const quote =
-                    window.pendingQuoteData = {};
-            
-                 console.log("OPEN MODAL DATA:", quote);
-                  window.pendingQuoteData = quote;
-
+                                
+                 console.log(
+                    "OPEN MODAL DATA:", 
+                    window.pendingQuoteData);
+                  
                     document.getElementById("quoteModal")
                     .style.display = "block";
 
@@ -2906,6 +2908,9 @@
                     document.getElementById("clientPhone").value
                 };
 
+                const quote =
+                window.pendingQuoteData || {};
+
                 console.log("QUOTE BEFORE SAVE:", quote);
                 
                 localStorage.setItem(
@@ -2913,10 +2918,7 @@
                     JSON.stringify(company)
                 );
 
-                const quote =
-                    window.pendingQuoteData || {};
-                    console.log("QUOTE BEFORE SAVE:", quote);
-
+                
                 quote.company = company;   
 
                 quote.client = client;
