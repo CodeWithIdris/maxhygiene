@@ -34,9 +34,7 @@ body{
     width:794px;
     min-height:1123px;
     margin:auto;
-    padding:40px;
-    box-shadow:none;
-    border-radius:0;
+    padding:0;
 }
 
 /* HEADER */
@@ -44,14 +42,14 @@ body{
 .header{
     background:#3f72bd;
     color:#fff;
-    padding:10px 15px;
+    padding:15px 25px;
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
 .company-name{
-    font: size 20px;
+    font-size:20px;
     font-weight:bold;
 }
 
@@ -71,14 +69,14 @@ body{
 /* CONTENT */
 
 .content{
-    padding:40px;
+    padding:30px;
 }
 
 .meta{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    margin-bottom:30px;
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    margin-bottom:40px;
 }
 
 .meta-card{
@@ -107,9 +105,8 @@ body{
 }
 
 .client-card{
-    background:none;
-    padding:0;
-    margin:0;
+     margin-bottom:40px;
+    line-height:1.8;
 }
 
 .client-card h3{
@@ -121,18 +118,20 @@ body{
 table{
     width:100%;
     border-collapse:collapse;
-    margin-top:30px;
+    margin-top:20px;
+}
 
 th{
     background:#f3f3f3;
-    border:1px solid #bbb;
-    padding:8px;
+    border:1px solid #bdbdbd;
+    padding:10px;
+    text-align:center;
     font-size:13px;
 }
 
 td{
-    border:1px solid #ccc;
-    padding:8px;
+    border:1px solid #cfcfcf;
+    padding:10px;
     font-size:13px;
 }
 
@@ -140,7 +139,7 @@ td{
 /* SUMMARY */
 
 .summary{
-    width:250px;
+    width:220px;
     margin-left:auto;
     margin-top:0;
 }
@@ -157,7 +156,7 @@ td{
 }
 
 .grand-total{
-    font-size:18px;
+    font-size:16px;
     font-weight:bold;
 }
 .grand-total span:last-child{
@@ -167,22 +166,23 @@ td{
 /* TERMS */
 
 .terms{
-    background:none;
-    padding:0;
-    margin-top:80px;
+    margin-top:120px;
+    font-size:13px;
+    line-height:1.8;
 }
 
 /* SIGNATURE */
 
 .signature{
+    display:flex;
+    justify-content:space-between;
     margin-top:40px;
-    width:250px;
-    margin-left:auto;
 }
 
 .signature-box{
-    padding-top:40px;
-    border-top:2px solid #d1d5db;
+    width:250px;
+    border-top:1px solid #000;
+    margin-bottom:10px;
 }
 
 .signature-title{
@@ -273,18 +273,26 @@ button:hover{
 <div class="quote-card" id="quoteDocument">
 
 <div class="header">
-     <div class="company-block">
-
-        <img id="companyLogo" style=" height:70px; margin-bottom:15px; display:none;">
 
     <div>
-        <div class="company-name" id="companyName"></div>
-        <div class="company-tag" id="companyInfo"></div>
+
+        <div class="company-name" id="companyName">
+            Company Name
+        </div>
+
+        <div class="company-tag" id="companyInfo">
+            Address<br>
+            Phone<br>
+            Email
+        </div>
+
     </div>
 
     <div class="quote-badge">
-        QUOTE
+        QUOTATION
     </div>
+
+</div>
 
 </div>
 
