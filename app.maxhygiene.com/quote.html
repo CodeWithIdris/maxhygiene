@@ -18,10 +18,10 @@
 }
 
 body{
-    font-family:'Inter',sans-serif;
-    background:#eef3f8;
-    padding:40px 20px;
-    color:#1f2937;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#e5e5e5;
+    padding:20px;
+    color:#000;
 }
 
 .quote-wrapper{
@@ -31,22 +31,28 @@ body{
 
 .quote-card{
     background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 15px 40px rgba(0,0,0,.08);
+    width:794px;
+    min-height:1123px;
+    margin:auto;
+    padding:40px;
+    box-shadow:none;
+    border-radius:0;
 }
 
 /* HEADER */
 
 .header{
-    background:#2f66c7;
-    color:white;
-    padding:25px 40px;
+    background:#3f72bd;
+    color:#fff;
+    padding:10px 15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .company-name{
-    font-size:34px;
-    font-weight:800;
+    font: size 20px;
+    font-weight:bold;
 }
 
 .company-tag{
@@ -55,11 +61,11 @@ body{
 }
 
 .quote-badge{
-    background:#2f66c7;
-    color:white;
-    border-radius:0;
-    font-size:18px;
-    padding:15px 30px;
+    background:none;
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    padding:0;
 }
 
 /* CONTENT */
@@ -76,9 +82,9 @@ body{
 }
 
 .meta-card{
-    background:#f8fafc;
-    padding:20px;
-    border-radius:12px;
+    background:none;
+    border:none;
+    padding:0;
 }
 
 .meta-title{
@@ -101,10 +107,9 @@ body{
 }
 
 .client-card{
-    background:#f8fafc;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:30px;
+    background:none;
+    padding:0;
+    margin:0;
 }
 
 .client-card h3{
@@ -116,35 +121,33 @@ body{
 table{
     width:100%;
     border-collapse:collapse;
-}
+    margin-top:30px;
 
 th{
-    background:#f3f4f6;
-    color:#111827;
-    border:1px solid #d1d5db;
+    background:#f3f3f3;
+    border:1px solid #bbb;
+    padding:8px;
+    font-size:13px;
 }
 
 td{
-    padding:15px;
-    border-bottom:1px solid #e5e7eb;
+    border:1px solid #ccc;
+    padding:8px;
+    font-size:13px;
 }
 
-tr:hover{
-    background:#fafafa;
-}
 
 /* SUMMARY */
 
 .summary{
-    width:380px;
+    width:250px;
     margin-left:auto;
-    margin-top:30px;
+    margin-top:0;
 }
 
 .summary-card{
-    background:white;
-    border:1px solid #d1d5db;
-    padding:25px;
+    border:none;
+    padding:0;
 }
 
 .summary-row{
@@ -154,9 +157,8 @@ tr:hover{
 }
 
 .grand-total{
-    font-size:32px;
-    font-weight:800;
-    color:#111827;
+    font-size:18px;
+    font-weight:bold;
 }
 .grand-total span:last-child{
     color:#111827;
@@ -165,20 +167,17 @@ tr:hover{
 /* TERMS */
 
 .terms{
-    margin-top:40px;
-    background:#f8fafc;
-    padding:25px;
-    border-radius:12px;
-    line-height:1.8;
+    background:none;
+    padding:0;
+    margin-top:80px;
 }
 
 /* SIGNATURE */
 
 .signature{
     margin-top:40px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
+    width:250px;
+    margin-left:auto;
 }
 
 .signature-box{
