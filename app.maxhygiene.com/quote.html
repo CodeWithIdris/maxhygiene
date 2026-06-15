@@ -491,25 +491,31 @@ if(quote){
         </p>
     `;
 
-    let html = "";
+let html = "";
 
-    quote.pricingdetailed.forEach(item=>{
+console.log("Quote Data:", quote);
 
-        const total =
-            item.Quantity * item.Price;
+const items =
+    quote.pricingdetailed ||
+    quote.lines ||
+    quote.items ||
+    [];
 
-        html += `
+    console.log("ITEMS:", items);
+    console.log("FULL QUOTE:", quote);
+
+items.forEach(item => {
+
+    html += `
         <tr>
-            <td>${item.Description}</td>
-            <td>${item.Quantity}</td>
-            <td>${quote.currency.Id}${item.Price}</td>
-            <td>${quote.currency.Id}${total}</td>
+            <td>${item.Description || item.description || ""}</td>
+            <td>${item.Quantity || item.quantity || ""}</td>
+            <td>${item.Price || item.price || ""}</td>
         </tr>
-        `;
-    });
+    `;
+});
 
-    document.getElementById("quoteLines").innerHTML =
-        html;
+document.getElementById("quoteLines").innerHTML = html;
 
     const subtotal =
         quote.pricing.Price;

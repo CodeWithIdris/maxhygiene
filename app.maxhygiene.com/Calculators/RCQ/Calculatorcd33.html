@@ -2835,9 +2835,13 @@
             ]);
             function openQuoteModal(){
 
-                window.pendingQuoteData = {};
+                const quote =
+                    window.pendingQuoteData = {};
             
-                document.getElementById("quoteModal")
+                 console.log("OPEN MODAL DATA:", quote);
+                  window.pendingQuoteData = quote;
+
+                    document.getElementById("quoteModal")
                     .style.display = "block";
 
                 loadCompanyProfile();
@@ -2902,6 +2906,8 @@
                     document.getElementById("clientPhone").value
                 };
 
+                console.log("QUOTE BEFORE SAVE:", quote);
+                
                 localStorage.setItem(
                     "companyProfile",
                     JSON.stringify(company)
@@ -2909,6 +2915,7 @@
 
                 const quote =
                     window.pendingQuoteData || {};
+                    console.log("QUOTE BEFORE SAVE:", quote);
 
                 quote.company = company;   
 
