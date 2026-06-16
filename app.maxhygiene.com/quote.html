@@ -31,7 +31,8 @@ body{
 
 .quote-card{
     width:100%;
-    max-width:1100px;
+    max-width:1200px;
+    min-height:1400px;
     margin:20px auto;
     background:#fff;
     box-shadow:0 2px 12px rgba(0,0,0,.08);
@@ -481,14 +482,10 @@ table th{
 </div>
 
 
-    <div class="signature">
-
-        <div>
-            <div class="signature-box"></div>
-            <div class="signature-title">Prepared By</div>
-        </div>
-
-        
+    <div style="margin-top:60px;width:300px;">
+        <div class="signature-box"></div>
+        <div class="signature-title">Prepared By</div>
+    </div>
 
     </div>
 
@@ -569,13 +566,7 @@ if(quote){
 
     document.getElementById("quoteNumber").innerHTML =
         quoteNumber;
-    
-    document.getElementById("quoteNumberCopy").innerHTML =
-        quoteNumber;
-    
-    document.getElementById("quoteDateCopy").innerHTML =
-        new Date().toLocaleDateString();
-
+            
     document.getElementById("quoteDate").innerHTML =
         new Date().toLocaleDateString();
     
@@ -631,6 +622,9 @@ items.forEach(item => {
 });
 console.log("Generated HTML:", html);
 document.getElementById("quoteLines").innerHTML = html;
+console.log("TBODY:", document.getElementById("quoteLines"));
+console.log("ROWS:", document.getElementById("quoteLines").children.length);
+console.log("TABLE POPULATED");
 
     const subtotal =
         Number(quote.pricing.Price).toFixed(2);
@@ -701,6 +695,8 @@ function downloadPDF(){
 
     const quoteNumber =
         document.getElementById("quoteNumber").innerText;
+        console.log("Reached quote number");
+
 
     const opt = {
 
