@@ -1823,11 +1823,14 @@
 
                         
                         var myJson = {
-                            logo: "Office Cleaning",
+
+                            serviceType: vm.selectedPreset,
+                            propertyType: vm.selectedProperty,
+                            
                             pricing:
                             {
                                 Heading: 'Costing',
-                                Description: 'Cleaning Service',
+                                Description: "Cleaning Service",
                                 Quantity: 1,
                                 Price: vm.grand.subtotal
                             },
@@ -2131,6 +2134,7 @@
                     vm.loadPresets();
                     vm.applyPreset = function (name) {
                         if (vm.presets[name]) {
+                            vm.selectedProperty = name;
                             vm.lines = angular.copy(vm.presets[name]);
                             vm.recalc();
                             if (name == 'large') {
