@@ -183,7 +183,7 @@ td{
 .signature{
     display:flex;
     justify-content:space-between;
-    margin-top:40px;
+    margin-top:50px;
 }
 
 .signature-box{
@@ -193,8 +193,8 @@ td{
 }
 
 .signature-title{
-    margin-top:10px;
-    color:#64748b;
+    margin-top:15px;
+    color:#5f7695;
 }
 
 .signature-area{
@@ -295,7 +295,7 @@ button:hover{
     }
 
     .actions{
-        display:none;
+        display:none !important;
     }
 
     .quote-card{
@@ -706,7 +706,17 @@ function downloadPDF(){
         document.getElementById("quoteNumber").innerText;
         console.log("Reached quote number");
 
+    document.querySelector(".actions").style.display = "none";
 
+    html2pdf()
+    .set(opt)
+    .from(document.getElementById("quoteDocument"))
+    .save()
+    .then(() => {
+
+        document.querySelector(".actions").style.display = "flex";
+
+    });
     const opt = {
 
         margin: 0.2,
