@@ -25,16 +25,16 @@ body{
 }
 
 .quote-wrapper{
-    max-width:1100px;
+    width:210mm;
     margin:auto;
 }
 
 .quote-card{
     width:100%;
-    max-width:1200px;
-    min-height:1400px;
+    max-width:1100px;
     margin:20px auto;
     background:#fff;
+    min-height:1400px;
     box-shadow:0 2px 12px rgba(0,0,0,.08);
 }
 
@@ -43,7 +43,7 @@ body{
 .header{
     background:#4474bc;
     color:#fff;
-    padding:15px 25px;
+    padding:25px 35px;
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
@@ -174,7 +174,7 @@ td{
 /* TERMS */
 
 .terms{
-    margin-top:80px;
+    margin-top:40px;
     font-size:13px;
     line-height:1.8;
 }
@@ -300,7 +300,7 @@ button:hover{
 .invoice-total{
     width:320px;
     margin-left:auto;
-    margin-top:25px;
+    margin-top:10px;
 }
 
 
@@ -322,8 +322,9 @@ table th{
 
 table td,
 table th{
-    border:1px solid #cfcfcf;
-    padding:12px;
+    border:1px solid #bdbdbd;
+    padding:10px;
+    font-size:13px;
 }
 
 .total-row{
@@ -482,7 +483,7 @@ table th{
 </div>
 
 
-    <div style="margin-top:60px;width:300px;">
+    <div style="margin-top:50px;">
         <div class="signature-box"></div>
         <div class="signature-title">Prepared By</div>
     </div>
@@ -711,7 +712,8 @@ function downloadPDF(){
         },
 
         html2canvas: {
-            scale: 2
+            scale: 3,
+            useCORS: true
         },
 
         jsPDF: {
