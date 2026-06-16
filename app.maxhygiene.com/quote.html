@@ -704,22 +704,12 @@ function downloadPDF(){
 
     const quoteNumber =
         document.getElementById("quoteNumber").innerText;
-        console.log("Reached quote number");
 
-    document.querySelector(".actions").style.display = "none";
+    console.log("Downloading PDF:", quoteNumber);
 
-    html2pdf()
-    .set(opt)
-    .from(document.getElementById("quoteDocument"))
-    .save()
-    .then(() => {
-
-        document.querySelector(".actions").style.display = "flex";
-
-    });
     const opt = {
 
-        margin: 0.2,
+        margin: [5,5,5,5],
 
         filename:
             quoteNumber + ".pdf",
@@ -731,17 +721,14 @@ function downloadPDF(){
 
         html2canvas: {
             scale: 2,
-            useCORS: true
+            useCORS: true,
+            scrollY: 0
         },
 
         jsPDF: {
             unit: "mm",
             format: "a4",
             orientation: "portrait"
-        },
-
-        pagebreak: {
-            mode: ["avoid-all"]
         }
     };
 
