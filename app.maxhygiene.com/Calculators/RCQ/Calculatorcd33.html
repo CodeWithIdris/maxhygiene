@@ -544,12 +544,12 @@
         fbq('init', '759553735622030');
         fbq('track', 'PageView');
     </script>
-    <noscript>
+    <!-- <noscript>
         <img height="1" width="1" style="display:none"
              src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&amp;ev=PageView&amp;noscript=1" />
-    </noscript>
+    </noscript> -->
     <!-- End Facebook Pixel Code -->
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager 
     <script>
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -563,16 +563,17 @@
         })(window, document, 'script', 'dataLayer', 'GTM-PX595DB');
     </script>
     <!-- End Google Tag Manager -->
+     -->
 
 </head>
 
 
 <body ng-controller="CalcCtrl as vm" class="pb-5 bg-squiggles">
     <!-- Google Tag Manager (noscript) -->
-    <noscript>
+    <!-- <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PX595DB"
                 height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
+    </noscript>-->
     <!-- End Google Tag Manager (noscript) -->
     <!-- Fixed Header -->
     <header class="app-header">
@@ -1228,11 +1229,11 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 d-flex justify-content-md-end justify-content-center align-items-center">
+                                <!-- <div class="col-md-6 d-flex justify-content-md-end justify-content-center align-items-center">
                                     <img class="img-fluid quote-image"
                                          src="../../../docflite.com/wp-content/uploads/2024/11/Quotes-On-brand-1.jpg"
                                          alt="Quote Example">
-                                </div>
+                                </div> -->
                             </div>
 
 
@@ -1747,9 +1748,9 @@
                     vm.apiTemplatesUrl = 'https://app.docflite.com/Templates/List?pageNumber=1&amp;pageSize=20';
 
 
-                    /* AUTH */
+                    /* AUTH 
                     vm.authCheckUrl = 'https://app.docflite.com/Account/GetLoggedIn'; // or '/account/status' in ASP.NET Core
-                    vm.auth = { isAuthenticated: false, name: null };
+                    vm.auth = { isAuthenticated: false, name: null };*/
 
                     //vm.loadLocal();
 
@@ -2293,9 +2294,10 @@
                     }
                     vm.deviceId = localStorage.getItem('deviceId');
 
-                    vm.getCountyData = function (county) {
+                    /*vm.getCountyData = function (county) {
                         const tableUrl = "https://docflitecalculatordata.table.core.windows.net/CalculatorUsage?";
                         const sas = "sv=2024-11-04&ss=t&srt=sco&sp=rwdlacu&se=2026-08-01T01:41:10Z&st=2025-10-21T17:26:10Z&spr=https&sig=DzVOfzmCKFzkyc%2BQvRO%2FD2SwI90Kl48aOh%2BGRC2ZWLI%3D"; // same SAS token
+                        */
 
                         // Filter: only UK + county name
                         const filter = encodeURIComponent(`PartitionKey eq 'UK' and County eq '${county}'`);
@@ -2384,11 +2386,11 @@
                         saveUserCalculation(entity);
                     }
 
-                    async function saveUserCalculation(entity) {
+                    /*async function saveUserCalculation(entity) {
                         const baseUrl = "https://docflitecalculatordata.table.core.windows.net/CalculatorUsage";
                         const sasToken = "?sv=2024-11-04&ss=t&srt=sco&sp=rwdlacu&se=2026-08-01T01:41:10Z&st=2025-10-21T17:26:10Z&spr=https&sig=DzVOfzmCKFzkyc%2BQvRO%2FD2SwI90Kl48aOh%2BGRC2ZWLI%3D";
                         const recordUrl = `${baseUrl}(PartitionKey='UK',RowKey='${entity.RowKey}')${sasToken}`;
-
+*/
                         try {
                             // 1️⃣ Try to GET the record
                             const getResponse = await fetch(recordUrl, {
@@ -2931,8 +2933,10 @@
 
                 quote.client = client;
 
+                const API_BASE = window.location.hostname === "127.0.0.1" ? "http://127.0.0.1:3000" : "https://maxhygiene-quotes.netlify.app";
+
                 const response = await fetch(
-                    "http://localhost:3000/api/quotes/import",
+                    `${API_BASE}/api/quotes/import`,
                     {
                         method: "POST",
                         headers: {
@@ -2948,9 +2952,13 @@
 
                     const result = await response.json();
 
-                    console.log(result);
+                    //console.log(result);
 
-                    alert(JSON.stringify(result, null, 2));
+                    if (result.success) {
+                        window.location.href = result.publicUrl;
+                    } else {
+                        alert(result.error || "Failed to create quote");
+                    }
                 }
     </script>
     <script>
